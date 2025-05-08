@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضاءات قانونية - El Amrani Consultancies</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Naskh Arabic', serif;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+            color: #333;
+            padding-top: 90px;
+        }
+
+        header {
+            background: #003366;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1000;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            font-size: 1.8rem;
+            color: #ffd700;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #003366;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            border: 1px solid #f9b703;
+        }
+
+        .back-button:hover {
+            transform: scale(1.1);
+            background: #002244;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .article {
+            background: #fff;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .article h2 {
+            color: #003366;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .article-meta {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .article-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 1.4rem;
+            }
+
+            .container {
+                padding: 0 0.5rem;
+            }
+
+            .article {
+                padding: 1.5rem;
+            }
+        }
+
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+            z-index: 1000;
+            transition: transform 0.2s;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .preview-text {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .card {
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .article-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .article-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .article-content {
+            padding: 1.5rem;
+        }
+
+        .article-preview {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            max-height: 3em;
+        }
+
+        .read-more-btn {
+            background: #003366;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .article-meta span {
+            margin-left: 1rem;
+            color: #666;
+        }
+
+        /* Responsive adjustments for mobile */
+        @media (max-width: 768px) {
+            .article-card {
+                margin-bottom: 1rem;
+            }
+
+            .article-image {
+                height: 150px; /* Reduced from 200px */
+            }
+
+            .article-content {
+                padding: 1rem; /* Reduced from 1.5rem */
+            }
+
+            h3 {
+                font-size: 1.1rem; /* Smaller title */
+                margin-bottom: 0.5rem;
+            }
+
+            .article-meta {
+                font-size: 0.8rem; /* Smaller meta text */
+                margin-bottom: 0.5rem;
+            }
+
+            .article-preview {
+                font-size: 0.9rem; /* Smaller preview text */
+                -webkit-line-clamp: 2;
+                max-height: 2.6em;
+            }
+
+            .read-more-btn {
+                padding: 0.3rem 0.8rem; /* Smaller button */
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Even smaller screens */
+        @media (max-width: 480px) {
+            .article-image {
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="back-button" title="العودة للرئيسية">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <h1 class="header-title">إضاءات قانونية <i class="fas fa-balance-scale"></i></h1>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="article-card">
+                    <div class="article-image">
+                        <img src="Contract.avif" alt="أهم النقاط التي يجب أخذها بعين الاعتبار عند التعاقد">
+                    </div>
+                    <div class="article-content">
+                        <h3>أهم النقاط التي يجب أخذها بعين الاعتبار عند التعاقد</h3>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar"></i> 8 يناير 2025</span>
+                            <span><i class="far fa-user"></i> عثمان العمراني</span>
+                        </div>
+                        <div class="article-text">
+                            <div class="preview-text">
+                                عند التعاقد، هناك عدة نقاط مهمة يجب الانتباه إليها لضمان حماية حقوق جميع الأطراف وتجنب النزاعات المستقبلية. فيما يلي أهم هذه النقاط.
+                            </div>
+                            <div class="full-text" style="display: none;">
+                                <br>
+                                <h4>1- تحديد الأطراف والتفاصيل الأساسية</h4>
+                                <p>يجب ذكر أسماء وبيانات الأطراف المتعاقدة بدقة، بما في ذلك العناوين ووسائل الاتصال. كما يجب تحديد مكان وتاريخ تحرير العقد، مما يساعد في تحديد القانون المعمول به في حالة نشوب نزاع قانوني.</p>
+                                <br>
+                                <h4>2- وضوح موضوع العقد والتزامات الأطراف</h4>
+                                <p>من الضروري توضيح موضوع العقد بشكل دقيق، بما يشمل البضائع أو الخدمات التي سيتم تقديمها واستلامها، كما يجب تحديد التزامات كل طرف بوضوح لتجنب التفسيرات المتضاربة في المستقبل.</p>
+                                <br>
+                                <h4>3- تحديد مدة العقد وشروط الإنهاء</h4>
+                                <p>يجب تحديد فترة سريان العقد بوضوح، مع توضيح طرق التجديد أو إنهاء العقد، كما يجب تحديد الشروط التي تسمح بإنهاء العقد قبل انتهاء مدته.</p>
+                                <br>
+                                <h4>4- آليات حل النزاعات</h4>
+                                <p>من المهم تحديد آليات تسوية المنازعات بين الأطراف، سواء كانت تتطلب وساطة أو تحكيم، كما يجب توضيح الجهات المختصة بالنظر في أي نزاع قد ينشأ عن العقد.</p>
+                                <br>
+                                <h4>5- الشروط المالية والجداول الزمنية</h4>
+                                <p>يجب أن تكون الشروط المالية والجداول الزمنية واضحة ومحددة بشكل جيد في العقد، مع تحديد الجوانب المالية بدقة.</p>
+                                <br>
+                                <h4>6- الامتثال للقوانين المحلية والدولية</h4>
+                                <p>يجب التأكد من توافق العقد مع القوانين المحلية والدولية ذات الصلة، ومراعاة أي متطلبات قانونية خاصة بالمجال الذي يندرج فيه العقد.</p>
+                                <br>
+                                <h4>7- مراجعة وتحليل الشروط القانونية</h4>
+                                <p>من الضروري مراجعة جميع الشروط القانونية للتأكد من صحتها وقانونيتها وتوافقها مع التشريعات السارية.</p>
+                                <br>
+                                <h4>8- التوثيق والتوقيع الصحيح</h4>
+                                <p>بعد الانتهاء من صياغة العقد، يجب على الأطراف التحقق من جميع التفاصيل والتأكد من صحتها قبل التوقيع النهائي. يجب أن يحتوي العقد على توقيعات الأطراف المعنية وأختامهم كدليل على موافقتهم الرسمية على الشروط المبينة في العقد.</p>
+                            </div>
+                        </div>
+                        <button class="read-more-btn" onclick="toggleArticle(this)">اقرأ المزيد</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="article-card">
+                    <div class="article-image">
+                        <img src="swearing-oath in court.jpg" alt="شخص يؤدي اليمين في المحكمة">
+                    </div>
+                    <div class="article-content">
+                        <h3>الفرق بين اليمين الحاسمة واليمين المتممة قضائيا</h3>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar"></i> 7 يناير 2025</span>
+                            <span><i class="far fa-user"></i> عثمان العمراني</span>
+                        </div>
+                        <div class="article-text">
+                            <div class="preview-text">
+                                اختلافات بين اليمين الحاسمة واليمين المتممة قضائياً: اليمين الحاسمة هي اليمين الذي يطلب الخصم توجيهها للخصم الآخر ليحسم بها النزاع في أي واقعة متنازع عليها.
+                            </div>
+                            <div class="full-text" style="display: none;">
+                                <br>
+                                <p>- اليمين الحاسمة سميت حاسمة لأنها تحسم الخصومة، وفيها يحتكم الخصم إلى ضمير خصمه. اليمين الحاسمة تحسم النزاع متى ما نكلها الخصم أو نكلها من ردت إليه.</p>
+                                <br>
+                                <p>- اليمين المتممة يوجهها القاضي من تلقاء نفسه لأي من الخصمين ليصل للقناعة التي تمكنه من الفصل في الدعوى متى ما كان الدليل يحتاج إلى ترجيح لنقصانه. اليمين المتممة يوجهها القاضي عندما يوجد المقتضى للترجيح بها وهي غير مقيدة بمسائل معينة في القانون والأمر فيها متروك لرأي القاضي.</p>
+                                <br>
+                                <h4>اختلافات أخرى بين اليمين المتممة واليمين الحاسمة:</h4>
+                                <ul>
+                                    <li>اليمين المتممة دليل تكميلي توجه لاستكمال أدلة ناقصة، أما اليمين الحاسمة تعد من الأدلة المستقلة التي تصلح وحدها للفصل في الدعوى.</li>
+                                    <li>اليمين المتممة يوجهها القاضي من تلقاء نفسه دون أن يكون هناك دخل لإرادة الخصوم فيها، وأما اليمين الحاسمة يوجهها القاضي بطلب من الخصوم.</li>
+                                    <li>يجوز للقاضي الرجوع في اليمين المتممة بعد توجيهها وعدم الركون إليها بعد حلفها، بينما لا يجوز الرجوع في اليمين الحاسمة بعد أن يقبلها الخصم.</li>
+                                    <li>اليمين المتممة لا تحسم النزاع، بينما اليمين الحاسمة تحسم النزاع لصالح من حلفها.</li>
+                                </ul>
+                                <br>
+                                <h4>خلاصة:</h4>
+                                <ul>
+                                    <li>اليمين الحاسمة يطلبها الخصم، أما المتممة فيوجهها القاضي.</li>
+                                    <li>لا يجوز للخصم الرجوع في اليمين الحاسمة بعد أن يقبلها، أما المتممة فللقاضي الرجوع عنها.</li>
+                                    <li>الحاسمة نتيجتها نهائية يكسب من يحلفها ويخسر من ينكل عنها، أما المتممة فليس لها ذلك.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button class="read-more-btn" onclick="toggleArticle(this)">اقرأ المزيد</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="article-card">
+                    <div class="article-image">
+                        <img src="moher.jpg" alt="بعض أهم التعديلات المتعلقة بقانون تنظيم علاقات العمل">
+                    </div>
+                    <div class="article-content">
+                        <h3>بعض أهم التعديلات المتعلقة بقانون تنظيم علاقات العمل</h3>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar"></i> 3 يناير 2025</span>
+                            <span><i class="far fa-user"></i> عثمان العمراني</span>
+                        </div>
+                        <div class="article-text">
+                            <div class="preview-text">
+                                • ما هي الشكاوى العمالية التي يتم إصدار قرار نهائي بشأنها من قبل الوزارة؟ تتولى الوزارة الفصل في المنازعة (الشكوى العمالية) متى كانت المطالبة موضوع النزاع لا تجاوز مبلغ 50 ألف درهم إماراتي أو متى كانت المنازعة بشأن عدم التزام أي من طرفيها بقرار التسوية الودية السابق صدوره في موضوعها من قبل الوزارة وبغض النظر عن قيمة المطالبة.
+                            </div>
+                            <div class="full-text" style="display: none;">
+                                <br><br>
+                                • في حال عدم موافقة أي من الطرفين على التسوية والقرار النهائي الصادر من قبل الوزارة، هل يحق لأي من الطرفين إقامة دعوى أمام محكمة الاستئناف للنظر في موضوع النزاع؟ يجوز لأي من طرفي النزاع إقامة دعوى أمام محكمة الاستئناف خلال 15 يوم عمل من تاريخ إخطاره بالقرار.
+                                <br><br>
+                                • إذا كانت قيمة المطالبة تتجاوز 50 ألف درهم هل يمكن للوزارة إصدار قرار نهائي في المنازعة؟ في حال تعذرت التسوية الودية بين الطرفين في الشكاوى العمالية التي تكون قيمة المطالبة فيها تتجاوز 50 ألف درهم يتم إحالة الشكوى للقضاء مصحوبة بمذكرة تتضمن ملخصا للنزاع وحجج الطرفين وتوصية الوزارة بخصوص هذه الشكوى.
+                                <br><br>
+                                • هل تقوم الوزارة بالفصل في المنازعة (الشكوى العمالية) إذا ما كان موضوع النزاع يتعلق بالإنهاء غير المشروع لخدمة العامل أو شرط عدم المنافسة؟ تتولى الوزارة بالفصل في المنازعة العمالية دون النظر لنوع المطالبة المالية متى ما كانت قيمة المطالبة موضوع النزاع لا تجاوز مبلغ 50 ألف درهم.
+                                <br><br>
+                                • إذا ما كانت قيمة المطالبة تتجاوز 50 ألف درهم إماراتي وعند بحث الطلب من قبل الوزارة اتضح للوزارة بأن المستحقات الفعلية لا تتجاوز 50 ألف درهم، هل يجوز للوزارة إصدار قرار نهائي في شأنها أو استكمال إجراءات إحالة الشكوى العمالية للقضاء؟ تكون العبرة بقيمة المطالبات الواردة في الشكوى فإذا كانت قيمة المطالبة المقدمة من قبل الشاكي تتجاوز 50,000 ألف درهم يتم إحالة الشكوى العمالية للقضاء دون النظر لما توصلت إليه الوزارة من مطالبات فعلية.
+                            </div>
+                        </div>
+                        <button class="read-more-btn" onclick="toggleArticle(this)">اقرأ المزيد</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="article-card">
+                    <div class="article-image">
+                        <img src="UAE.jpg" alt="قانون الشركات الإماراتي الجديد">
+                    </div>
+                    <div class="article-content">
+                        <h3>قانون الشركات الإماراتي الجديد</h3>
+                        <div class="article-meta">
+                            <span><i class="far fa-calendar"></i> 3 يناير 2025</span>
+                            <span><i class="far fa-user"></i> عثمان العمراني</span>
+                        </div>
+                        <div class="article-text">
+                            <div class="preview-text">
+                                قانون الشركات الإماراتي الجديد يعد خطوة رائدة على المستوى العالمي في مجال تنظيم وحوكمة الشركات العائلية. يهدف هذا القانون إلى تعزيز نمو واستمرارية هذه الشركات، وضمان انتقالها السلس بين الأجيال.
+                            </div>
+                            <div class="full-text" style="display: none;">
+                                <h4>أبرز ملامح القانون</h4>
+                                <ul>
+                                    <li>إنشاء سجل موحد: تحت إشراف وزارة الاقتصاد، لتنظيم عمل الشركات العائلية في الدولة.</li>
+                                    <li>نطاق التطبيق: يشمل الشركات العائلية والتجارية، باستثناء شركات المساهمة العامة والتضامن.</li>
+                                    <li>لجنة فض النزاعات: تشكيل لجنة في كل إمارة لحل النزاعات بين الشركات العائلية بكفاءة وسرية.</li>
+                                    <li>ميثاق العائلة: يتضمن قواعد خاصة بملكية وأهداف وقيم العائلة، وآليات تقييم الحصص وتوزيع الأرباح.</li>
+                                </ul>
+                                <h4>أهداف القانون</h4>
+                                <ul>
+                                    <li>تعزيز استمرارية الشركات العائلية إلى ما بعد الجيل الثالث والرابع.</li>
+                                    <li>دعم قدرة الشركات على التوسع والنمو بشكل مستدام.</li>
+                                    <li>تعزيز تنافسية الشركات العائلية محلياً وعالمياً.</li>
+                                </ul>
+                                <h4>تأثير القانون</h4>
+                                <p>يعتبر هذا القانون خطوة استباقية تعزز مكانة الإمارات كوجهة مفضلة لاستثمارات الشركات العائلية إقليمياً وعالمياً. كما أنه يدعم برنامج "ثبات" الذي يهدف إلى تحويل 200 مشروع عائلي إلى شركات اقتصادية كبرى بحلول عام 2030.</p>
+                                <h4>الخاتمة</h4>
+                                <p>يمثل قانون الشركات الإماراتي الجديد نقلة نوعية في تنظيم الشركات العائلية، مما يعزز دور هذه الشركات في دعم الاقتصاد الوطني ويساهم في تحقيق رؤية الإمارات الاقتصادية طويلة المدى.</p>
+                            </div>
+                        </div>
+                        <button class="read-more-btn" onclick="toggleArticle(this)">اقرأ المزيد</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="https://wa.me/+971525720497" class="whatsapp-button" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        function toggleArticle(button) {
+            const articleContent = button.closest('.article-content');
+            const previewText = articleContent.querySelector('.preview-text');
+            const fullText = articleContent.querySelector('.full-text');
+            
+            if (fullText.style.display === 'none' || !fullText.style.display) {
+                fullText.style.display = 'block';
+                previewText.style.display = 'none';
+                button.textContent = 'أظهر أقل';
+                
+                // Smooth scroll to the top of the article
+                button.closest('.article-card').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            } else {
+                fullText.style.display = 'none';
+                previewText.style.display = 'block';
+                button.textContent = 'اقرأ المزيد';
+            }
+        }
+    </script>
+</body>
+</html> 
