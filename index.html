@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="El Amrani Consultancies - Professional business consultancy in UAE specializing in company formation, paralegal services, and administrative solutions in Dubai. Your trusted partner for comprehensive business solutions.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> El Amrani Consultancies </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+            color: #333;
+            padding-top: 130px;
+            position: relative;
+            margin: 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #003366;
+            color: #fff;
+            padding: 0 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: 90px;
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+            padding-right: 120px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: transparent;
+            flex: 1;
+            margin-left: 20px;
+        }
+
+        header img {
+            height: 95px;
+            width: 100px;
+            border: none;
+            border-radius: 4px;
+            background-color: #ffffff;
+            padding: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            object-fit: contain;
+        }
+
+        .header-content img {
+            display: block;
+            background: #ffffff;
+        }
+
+        header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #ffd700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        .contact-links a {
+            color: #fff;
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+
+        .contact-links img {
+            width: 30px;
+            height: 30px;
+            padding: 0;
+            background: none;
+            border-radius: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            background: #004080;
+            padding: 1rem;
+            position: fixed;
+            top: 90px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            margin: 0;
+            margin-bottom: 2rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+        }
+
+        nav a i {
+            font-size: 1.1rem;
+        }
+
+        /* Hide menu toggle and close buttons by default */
+        .menu-toggle, .close-menu {
+            display: none;
+        }
+
+        /* Media query for small screens */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+                position: fixed;
+                top: 25px;
+                left: 15px;
+                z-index: 1002;
+                background: none;
+                border: none;
+                color: #fff;
+                font-size: 1.5rem;
+                cursor: pointer;
+                padding: 5px;
+            }
+
+            nav {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 280px;
+                height: auto;
+                background: #003366;
+                padding: 0;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 1001;
+                box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+            }
+
+            nav.open {
+                transform: translateX(0);
+            }
+
+            nav a {
+                padding: 15px 20px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            nav a:last-child {
+                border-bottom: none;
+            }
+
+            nav a:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+            nav a i {
+                width: 25px;
+                margin-right: 15px;
+            }
+
+            .close-menu {
+                display: none;
+            }
+
+            .header-content {
+                margin-left: 50px;
+            }
+        }
+
+        /* Adjust for smaller screens */
+        @media (max-width: 480px) {
+            nav {
+                width: 250px;
+            }
+        }
+
+        section {
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        #home {
+            background: #e8f5e9;
+            padding: 3rem 2rem;
+        }
+
+        .home-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0;
+            padding: 0 2rem;
+        }
+
+        .home-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .home-text h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 0;
+        }
+
+        .home-text h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #8B6B3D;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            margin-bottom: 1.5rem;
+        }
+
+        .home-text p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .home-image {
+            flex: 0.8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .home-image img {
+            max-width: 80%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 0;
+        }
+
+        @media (max-width: 768px) {
+            .home-container {
+                flex-direction: column;
+                gap: 0;
+                padding: 1rem;
+            }
+
+            .home-text {
+                text-align: center;
+            }
+
+            .home-image img {
+                max-width: 60%;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            }
+
+            .home-text h1 {
+                font-size: 2rem;
+                color: #8B6B3D;
+            }
+        }
+
+        #services {
+            background: #001f3f;
+            color: #fff;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        #services h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: #ffd700;
+            margin-bottom: 2rem;
+        }
+
+        .services-intro {
+            color: #fff;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+
+        #services-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: transparent;
+            border: 1px solid #ffd700;
+            border-radius: 8px;
+            color: #fff;
+            padding: 2rem;
+            flex: 0 1 calc(33.333% - 2rem);
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+        }
+
+        .service-card img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1rem;
+            filter: invert(71%) sepia(87%) saturate(628%) hue-rotate(358deg) brightness(103%) contrast(104%);
+        }
+
+        .service-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #ffd700;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: #fff;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .service-card {
+                flex: 0 1 calc(100% - 2rem);
+                max-width: 100%;
+            }
+        }
+
+        #blog {
+            background: #e8e8e8;
+        }
+
+        footer {
+            background: #004080;
+            color: #fff;
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+
+        .section-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            #services {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .service-card {
+                flex: 1 1 100%;
+                width: 90%;
+            }
+
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header img {
+                width: 80px;
+                height: 60px;
+            }
+
+            header h1 {
+                font-size: 1.2rem;
+            }
+
+            nav a {
+                font-size: 1rem;
+            }
+        }
+
+        /* Add these styles for the footer */
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .contact-info {
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        /* Add this in the head section for Font Awesome icons */
+
+        /* Add these styles for the nav icons */
+        nav a i {
+            margin-right: 8px;
+        }
+
+        nav a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Add these styles for the slider */
+        #partners {
+            background: #fff;
+            padding: 4rem 0;
+        }
+
+        .slider-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            align-items: center;
+        }
+
+        .slide {
+            min-width: calc(100% / 4);
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .slide img {
+            max-width: 150px;
+            height: auto;
+            object-fit: contain;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+        }
+
+        .slide img:hover {
+            filter: grayscale(0%);
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 0.5rem;
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ccc;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: #004080;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                min-width: calc(100% / 2);
+            }
+        }
+
+        .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .text-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .image-content {
+            flex: 1;
+        }
+
+        .image-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .section-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .text-content {
+                text-align: center;
+            }
+        }
+
+        /* Base responsive styles */
+        @media (max-width: 1200px) {
+            .home-container, 
+            #services-content,
+            .section-content {
+                max-width: 95%;
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            header h1 {
+                font-size: 1.6rem;
+            }
+
+            .service-card {
+                flex: 0 1 calc(50% - 2rem);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+
+            header {
+                height: 70px;
+            }
+
+            header img {
+                height: 60px;
+                width: 65px;
+            }
+
+            .header-content {
+                gap: 0.5rem;
+            }
+
+            nav {
+                top: 70px;
+            }
+
+            .service-card {
+                flex: 0 1 100%;
+                min-width: auto;
+            }
+
+            .home-text h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.2rem;
+            }
+
+            .contact-links {
+                gap: 0.5rem;
+            }
+
+            .contact-links img {
+                width: 25px;
+                height: 25px;
+            }
+
+            .home-container,
+            #services-content {
+                padding: 0 0.5rem;
+            }
+
+            .service-card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Fix for very small screens */
+        @media (max-width: 320px) {
+            header h1 {
+                font-size: 1rem;
+            }
+
+            header img {
+                height: 50px;
+                width: 55px;
+            }
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 16px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: translateY(-3px);
+        }
+
+        .whatsapp-float i {
+            font-size: 24px;
+            margin-right: 8px;
+        }
+
+        @media screen and (max-width: 767px) {
+            .whatsapp-float {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+            
+            .whatsapp-float i {
+                font-size: 20px;
+            }
+        }
+
+        .home-text .contact-links {
+            position: static;
+            justify-content: flex-start;
+            margin-top: 1rem;
+        }
+
+        .home-text .contact-links img {
+            width: 30px;
+            height: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .home-text .contact-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .contact-links {
+                display: none;  /* Hide contact links in header on mobile */
+            }
+        }
+
+        .blog-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            background: #f5f5f5;
+        }
+
+        .blog-card {
+            flex: 0 1 calc(50% - 1rem);
+            background: #fff;
+            border-radius: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .blog-image {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 2rem;
+            text-align: left;
+        }
+
+        .blog-date {
+            color: #888;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .blog-card h3 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+        }
+
+        .blog-card p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .continue-reading {
+            color: #333;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            font-weight: 500;
+            display: inline-block;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .continue-reading:hover {
+            border-bottom-color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .blog-grid {
+                padding: 0 1rem;
+            }
+            
+            .blog-card {
+                flex: 0 1 100%;
+            }
+            
+            .blog-content {
+                padding: 1.5rem;
+            }
+        }
+
+        #between-realms {
+            background: #f5f5f5;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .realm-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .realm-icon {
+            margin-bottom: 2rem;
+        }
+
+        .acorn-icon {
+            width: 60px;
+            height: 60px;
+            transform: rotate(-15deg);
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+        }
+
+        #between-realms h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: #003366;
+            margin-bottom: 2rem;
+        }
+
+        .realm-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            #between-realms {
+                padding: 3rem 1rem;
+            }
+            
+            #between-realms h2 {
+                font-size: 2rem;
+            }
+        }
+
+        .english-text {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: var(--text-color);
+        }
+
+        .english-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .text-divider {
+            margin: 3rem 0;
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(0,0,0,0.2), transparent);
+        }
+
+        .arabic-text {
+            font-family: 'Noto Naskh Arabic', serif;
+            font-size: 1.3rem;
+            line-height: 2;
+            text-align: right;
+            direction: rtl;
+            color: var(--text-color);
+        }
+
+        .arabic-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .english-text p,
+            .arabic-text p {
+                font-size: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .text-divider {
+                margin: 2rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <header>
+        <div class="header-content">
+            <img src="company-logo.png" alt="Company Logo">
+            <h1>El Amrani Consultancies</h1>
+        </div>
+        <div class="contact-links">
+            <a href="https://wa.me/971525720497"><img src="whatsapp.png" alt="WhatsApp"></a>
+            <a href="http://www.t.me/elamraniinfo"><img src="telegram.png" alt="Telegram"></a>
+        </div>
+    </header>
+
+    <nav>
+        <button class="close-menu">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#home"><i class="fas fa-home"></i> Home</a>
+        <a href="#services"><i class="fas fa-cogs"></i> Services</a>
+        <a href="blog.html"><i class="fas fa-blog"></i> Blog</a>
+        <a href="between-realms.html"><i class="fas fa-book"></i> Between The Realms</a>
+        <a href="Legal-insights/legal-insights.html"><i class="fas fa-gavel"></i> إضاءات قانونية</a>
+    </nav>
+
+    <section id="home">
+        <div class="home-container">
+            <div class="home-text">
+                <h2>Welcome to</h2>
+                <h1>El Amrani Consultancies</h1>
+                <p>Welcome to El Amrani Consultancies, your trusted partner for comprehensive business solutions in the UAE. We specialize in assisting entrepreneurs and businesses with company formation, paralegal services, and administrative tasks, ensuring smooth operations and compliance.
+                <br><br>
+                Our expertise is tailored to meet the needs of both startups and established enterprises, offering professional guidance to navigate the complexities of legal and administrative processes. Whether you're setting up a new business, managing corporate documentation, or handling administrative requirements, we are here to streamline your journey to success.
+                <br><br>
+                Explore our website to discover more about our services and connect with us to elevate your business potential.</p>
+                
+                <div class="contact-links">
+                    <a href="https://wa.me/971525720497"><img src="whatsapp.png" alt="WhatsApp"></a>
+                    <a href="http://www.t.me/elamraniinfo"><img src="telegram.png" alt="Telegram"></a>
+                </div>
+            </div>
+            <div class="home-image">
+                <img src="main.png" alt="Consultancy overview">
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2>Our Services</h2>
+        <div id="services-content">
+            <div class="service-card">
+                <img src="corporate.png" alt="Service Icon">
+                <h3>Company Formation Documents</h3>
+                <p>Preparation and submission of essential documents for company setup, including Memorandum of Association, trade licenses, and partnership agreements.</p>
+            </div>
+            <div class="service-card">
+                <img src="pro.png" alt="Service Icon">
+                <h3>PRO Services</h3>
+                <p>Processing work visas, labor cards, and Emirates IDs. Assisting with document submissions for government approvals.</p>
+            </div>
+            <div class="service-card">
+                <img src="translate.png" alt="Service Icon">
+                <h3>Legal Document Translation & Attestation</h3>
+                <p>Certified translation for official documents and attestation through the Ministry of Foreign Affairs and embassies.</p>
+            </div>
+            <div class="service-card">
+                <img src="immigration.png" alt="Service Icon">
+                <h3>Visa & Immigration Assistance</h3>
+                <p>Support for work visas, investor visas, family visas, and residency renewals, including guidance on UAE Golden Visa.</p>
+            </div>
+            <div class="service-card">
+                <img src="bank.png" alt="Service Icon">
+                <h3>Banking & Compliance Support</h3>
+                <p>Assistance with corporate bank account openings and ensuring AML/KYC compliance.</p>
+            </div>
+            <div class="service-card">
+                <img src="licensing.png" alt="Service Icon">
+                <h3>Annual License Renewals</h3>
+                <p>Streamlining the process for trade license renewals with automated reminders for timely submissions.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="partners">
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide">
+                    <img src="https://www.dc.gov.ae/PublicServices/" alt="Dubai Courts">
+                </div>
+                <div class="slide">
+                    <img src="https://www.dubaipolice.gov.ae/wps/portal/home
+                    " alt="Dubai Police">
+                </div>
+                <div class="slide">
+                    <img src="https://alaamri.ae/wp-content/uploads/2023/07/dubai-land.png" alt="Dubai Land">
+                </div>
+                <div class="slide">
+                    <img src="https://alaamri.ae/wp-content/uploads/2023/07/dubai-economic.png" alt="Dubai Economic">
+                </div>
+                <div class="slide">
+                    <img src="https://alaamri.ae/wp-content/uploads/2023/07/dubai-chamber.png" alt="Dubai Chamber">
+                </div>
+                <div class="slide">
+                    <img src="https://alaamri.ae/wp-content/uploads/2023/07/ministry-of-justice.png" alt="Ministry of Justice">
+                </div>
+                <div class="slide">
+                    <img src="https://alaamri.ae/wp-content/uploads/2023/07/ministry-of-economy.png" alt="Ministry of Economy">
+                </div>
+            </div>
+            <div class="slider-nav">
+                <span class="nav-dot active"></span>
+                <span class="nav-dot"></span>
+                <span class="nav-dot"></span>
+                <span class="nav-dot"></span>
+                <span class="nav-dot"></span>
+                <span class="nav-dot"></span>
+                <span class="nav-dot"></span>
+            </div>
+        </div>
+    </section>
+
+    <section id="blog">
+        <div class="blog-grid">
+            <article class="blog-card">
+                <div class="blog-image">
+                    <img src="blog/dmcc.webp" alt="Business Setup in DMCC">
+                </div>
+                <div class="blog-content">
+                    <span class="blog-date">August 11, 2024</span>
+                    <h3>Guide to UAE Business Setup</h3>
+                    <p>Essential steps and requirements for establishing your business in the UAE. Understanding the process and requirements for a successful launch...</p>
+                    <a href="#" class="continue-reading">CONTINUE READING →</a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-image">
+                    <img src="blog/golden visa.jpg" alt="UAE Golden Visa">
+                </div>
+                <div class="blog-content">
+                    <span class="blog-date">August 11, 2024</span>
+                    <h3>UAE Golden Visa: Complete Guide</h3>
+                    <p>Understanding the benefits and eligibility criteria for UAE Golden Visa. A comprehensive guide to the application process...</p>
+                    <a href="#" class="continue-reading">CONTINUE READING →</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            <div class="contact-info">
+                <p><i class="fas fa-phone"></i> Phone: +971 525 7204 97</p>
+                <p><i class="fas fa-envelope"></i> Email: legal@elamrani.info</p>
+            </div>
+            <p class="copyright">&copy; 2024 El Amrani Consultancies. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/971525720497" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        Chat with us
+    </a>
+
+    <script>
+        // Slider functionality
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.nav-dot');
+        let currentSlide = 0;
+        const slideCount = slides.length;
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * (100/4)}%)`;
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[currentSlide].classList.add('active');
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                updateSlider();
+            });
+        });
+
+        // Auto slide every 4 seconds
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % (slideCount - 3);
+            updateSlider();
+        }, 4000);
+
+        // Menu functionality
+        const menuToggle = document.querySelector('.menu-toggle');
+        const closeMenu = document.querySelector('.close-menu');
+        const nav = document.querySelector('nav');
+        const navLinks = document.querySelectorAll('nav a');
+
+        // Toggle menu when hamburger icon is clicked
+        menuToggle.addEventListener('click', () => {
+            nav.classList.add('open');
+        });
+
+        // Close menu when close button is clicked
+        closeMenu.addEventListener('click', () => {
+            nav.classList.remove('open');
+        });
+
+        // Close menu when a nav link is clicked
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('open');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
+                nav.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>

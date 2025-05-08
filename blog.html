@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="El Amrani Consultancies Blog - Expert insights on business formation, legal services, and administrative solutions in UAE. Stay updated with the latest business trends and regulations in Dubai.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Amrani Consultancies - Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        /* Header and Nav styles (same as main page) */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #004080;
+            color: #fff;
+            padding: 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        header img {
+            height: 80px;
+            width: 100px;
+            border: 2px solid #fff;
+            border-radius: 4px;
+            background-color: white;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            background: #004080;
+            padding: 1rem;
+            position: sticky;
+            top: 106px;
+            z-index: 999;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Blog specific styles */
+        .blog-header {
+            background: linear-gradient(rgba(0,64,128,0.9), rgba(0,64,128,0.9)), url('https://via.placeholder.com/1920x600');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .blog-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .blog-posts {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .blog-post {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-5px);
+        }
+
+        .blog-post img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .post-content {
+            padding: 1.5rem;
+        }
+
+        .post-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .post-title {
+            color: #004080;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .post-excerpt {
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .read-more {
+            display: inline-block;
+            color: #004080;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .sidebar {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .sidebar-widget {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .widget-title {
+            color: #004080;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .categories-list, .recent-posts-list {
+            list-style: none;
+        }
+
+        .categories-list li, .recent-posts-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .categories-list a, .recent-posts-list a {
+            color: #444;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .categories-list a:hover, .recent-posts-list a:hover {
+            color: #004080;
+        }
+
+        footer {
+            background: #004080;
+            color: #fff;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .blog-container {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .header-content h1 {
+            color: #D4AF37;
+        }
+
+        header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #ffd700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+            background-color: #128C7E;
+        }
+
+        /* Add media query for mobile responsiveness */
+        @media (max-width: 768px) {
+            .whatsapp-button {
+                width: 50px;
+                height: 50px;
+                font-size: 25px;
+                bottom: 15px;
+                left: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="https://www.elamrani.info">
+                <img src="company-logo.png" alt="Company Logo">
+            </a>
+            <h1>El Amrani Consultancies</h1>
+        </div>
+    </header>
+
+    <nav>
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="index.html#services"><i class="fas fa-cogs"></i> Services</a>
+        <a href="blog.html"><i class="fas fa-blog"></i> Blog</a>
+    </nav>
+
+    <div class="blog-header">
+        <h1>Our Latest Insights</h1>
+        <p>Stay updated with the latest trends and expert advice in business consultancy</p>
+    </div>
+
+    <div class="blog-container">
+        <main class="blog-posts">
+            <!-- First/Latest Blog Post -->
+            <article class="blog-post">
+                <img src="blog/dubai-business.jpg" alt="Dubai Business Setup, company formation Dubai, business setup Dubai, legal consultancy Dubai, paralegal services Dubai, best company formation consultants in Dubai, how to start a business in Dubai, Dubai business setup cost, paralegal services for expats in Dubai
+                ">
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span><i class="far fa-calendar"></i> January 1, 2025</span>
+                        <span><i class="far fa-user"></i> Admin</span>
+                    </div>
+                    <h2 class="post-title">Dubai Business Setup Guide for Expats 2025</h2>
+                    <p class="post-excerpt">Setting up a business in Dubai as an expat in 2025 offers exciting opportunities in a thriving global hub. This guide outlines the key steps and considerations for entrepreneurs looking to establish their ventures in the emirate.</p>
+                    <div class="full-post">
+                        <h3>Choosing Your Business Activity</h3>
+                        <p>The first crucial step is determining your business activity. Dubai's Department of Economic Development (DED) provides a comprehensive list of permitted activities across various sectors. Common categories include:</p>
+                        <ul>
+                            <li>Commercial (trading)</li>
+                            <li>Professional (services)</li>
+                            <li>Industrial (manufacturing)</li>
+                        </ul>
+                        <p>Carefully select an activity that aligns with your expertise and Dubai's market demands.</p>
+
+                        <h3>Selecting the Right Jurisdiction</h3>
+                        <p>Dubai offers three main jurisdictions for business setup:</p>
+                        <ol>
+                            <li>Mainland: Ideal for targeting the local UAE market</li>
+                            <li>Free Zones: Perfect for 100% foreign ownership and tax benefits</li>
+                            <li>Offshore: Designed for international business activities without physical presence</li>
+                        </ol>
+                        <p>Each jurisdiction has its advantages, so consider your business goals when making this choice.</p>
+
+                        <h3>Legal Structure and Licensing</h3>
+                        <p>Decide on a legal structure for your company. Popular options include:</p>
+                        <ul>
+                            <li>Limited Liability Company (LLC)</li>
+                            <li>Sole Proprietorship</li>
+                            <li>Branch of a Foreign Company</li>
+                            <li>Free Zone Company</li>
+                        </ul>
+                        <p>Once you've chosen a structure, apply for the appropriate license (commercial, professional, or industrial) through the Department of Economy and Tourism (DET) or the relevant free zone authority.</p>
+
+                        <h3>Registration and Documentation</h3>
+                        <p>The registration process involves several key steps:</p>
+                        <ol>
+                            <li>Choose and register your business name</li>
+                            <li>Obtain initial approvals</li>
+                            <li>Prepare and submit required documents</li>
+                            <li>Secure office space (if required)</li>
+                            <li>Apply for visas and work permits</li>
+                        </ol>
+                        <p>Ensure all documentation is accurate and complete to avoid delays in the setup process.</p>
+
+                        <h3>Financial Considerations</h3>
+                        <h4>Costs</h4>
+                        <p>Business setup costs in Dubai can vary widely depending on your chosen jurisdiction and business type. Typical expenses include:</p>
+                        <ul>
+                            <li>Trade license fees: AED 6,000 – AED 50,000</li>
+                            <li>Office space rent: AED 15,000 – AED 150,000 annually</li>
+                            <li>Visa processing: AED 3,000 – AED 5,000 per visa</li>
+                        </ul>
+
+                        <h4>Banking</h4>
+                        <p>Opening a corporate bank account is essential for managing your business finances. Choose a reputable UAE bank and prepare the following documents:</p>
+                        <ul>
+                            <li>Trade license</li>
+                            <li>Shareholder details</li>
+                            <li>Memorandum of Association (MOA)</li>
+                        </ul>
+
+                        <h3>Taxation and Compliance</h3>
+                        <p>As of 2025, businesses in Dubai must be aware of the following tax obligations:</p>
+                        <ul>
+                            <li>Value Added Tax (VAT)</li>
+                            <li>Corporate Tax</li>
+                        </ul>
+                        <p>Register with the Federal Tax Authority and ensure compliance with all relevant regulations.</p>
+
+                        <h3>Visa and Residency</h3>
+                        <p>Obtain the necessary visas for yourself and your employees. Dubai's flexible visa policies make it easier for expats to live and work in the emirate.</p>
+
+                        <h3>Conclusion</h3>
+                        <p>Setting up a business in Dubai as an expat in 2025 offers numerous advantages, including access to global markets, a strategic location, and a business-friendly environment.</p>
+                        <p>By following this guide and seeking professional assistance when needed, you can navigate the setup process successfully and establish your business in one of the world's most dynamic cities.</p>
+                    </div>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </article>
+
+            <!-- Second Blog Post -->
+            <article class="blog-post">
+                <img src="blog/dubai.jpg" alt="Dubai, UAE">
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span><i class="far fa-calendar"></i> December 18, 2024</span>
+                        <span><i class="far fa-user"></i> Admin</span>
+                    </div>
+                    <h2 class="post-title">5 Tips for Successful Business Formation in UAE</h2>
+                    <p class="post-excerpt">The United Arab Emirates (UAE) is a hub of opportunities for entrepreneurs and businesses alike. With its strategic location, robust infrastructure, and business-friendly policies, the UAE offers an ideal environment for establishing a company. However, forming a business here requires careful planning and adherence to regulations...</p>
+                    <div class="full-post">
+                        <h3>1. Choose the Right Business Structure</h3>
+                        <p>Selecting the correct business structure is the foundation of your success. The UAE offers several options, including:</p>
+                        <ul>
+                            <li>Mainland Company: Allows operations across the UAE and partnerships with local and international clients.</li>
+                            <li>Free Zone Company: Provides benefits like 100% ownership, tax exemptions, and streamlined processes within designated areas.</li>
+                            <li>Offshore Company: Suitable for businesses looking for asset protection and international trade.</li>
+                        </ul>
+                        <p>Evaluate your business goals and operational needs to determine the most suitable structure.</p>
+
+                        <h3>2. Understand Legal Requirements</h3>
+                        <p>The UAE has specific legal and regulatory requirements for business formation. Ensure you comply with the following:</p>
+                        <ul>
+                            <li>Trade Name Registration: Choose a unique trade name that adheres to UAE guidelines.</li>
+                            <li>Licensing: Obtain the appropriate license based on your business activity (e.g., commercial, professional, or industrial license).</li>
+                            <li>Local Sponsorship: Mainland companies often require a local sponsor or service agent, who owns 51% of the shares. Free zones and offshore companies do not require this.</li>
+                        </ul>
+                        <p>Consulting a legal expert or business advisor can simplify navigating these regulations.</p>
+
+                        <h3>3. Select the Ideal Location</h3>
+                        <p>The location of your business can significantly impact its success. Consider the following factors:</p>
+                        <ul>
+                            <li>Proximity to your target market.</li>
+                            <li>Availability of resources and facilities.</li>
+                            <li>Cost-effectiveness and operational efficiency.</li>
+                        </ul>
+                        <p>For example, free zones like Dubai Multi Commodities Centre (DMCC) and Jebel Ali Free Zone (JAFZA) offer industry-specific benefits, while mainland locations provide flexibility in operating across the UAE.</p>
+
+                        <h3>4. Budget Wisely</h3>
+                        <p>Establishing a business in the UAE involves various costs, including:</p>
+                        <ul>
+                            <li>Registration and licensing fees.</li>
+                            <li>Office space rental.</li>
+                            <li>Visa and immigration expenses.</li>
+                        </ul>
+                        <p>Prepare a detailed budget to avoid unforeseen expenses. Free zones often provide packages that include office space, visas, and other essentials, which can help streamline costs.</p>
+
+                        <h3>5. Leverage Professional Assistance</h3>
+                        <p>Navigating the complexities of business formation can be challenging, especially for first-time entrepreneurs. Professional consultants can assist with:</p>
+                        <ul>
+                            <li>Drafting and submitting required documentation.</li>
+                            <li>Liaising with government authorities.</li>
+                            <li>Advising on the most beneficial legal structure and location.</li>
+                        </ul>
+                        <p>Their expertise can save you time and effort, ensuring compliance with UAE laws and regulations.</p>
+
+                        <h3>Final Thoughts</h3>
+                        <p>Starting a business in the UAE is an exciting venture that offers immense potential for growth. By choosing the right structure, understanding legal requirements, selecting the best location, budgeting wisely, and seeking professional assistance, you can set the stage for a successful business journey. With proper planning and execution, your business can thrive in the UAE's dynamic market.</p>
+                    </div>
+                    <a href="#" class="read-more"><span>Read More</span></a>
+                </div>
+            </article>
+
+            <!-- Third Blog Post -->
+            <article class="blog-post">
+                <img src="blog/dmcc.webp" alt="DMCC Free Zone Dubai">
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span><i class="far fa-calendar"></i> December 18, 2024</span>
+                        <span><i class="far fa-user"></i> Admin</span>
+                    </div>
+                    <h2 class="post-title">DMCC Free Zone: A Gateway to Business Success in Dubai</h2>
+                    <p class="post-excerpt">The Dubai Multi Commodities Centre (DMCC) Free Zone has emerged as one of the leading hubs for businesses in Dubai. Strategically located in the heart of the city, the DMCC offers unparalleled advantages to entrepreneurs and multinational companies seeking to establish a strong presence in the UAE...</p>
+                    <div class="full-post">
+                        <h3>What is DMCC Free Zone?</h3>
+                        <p>Established in 2002, the DMCC Free Zone is designed to attract businesses from various industries, particularly those involved in trade, commodities, and services. With its vibrant ecosystem, state-of-the-art infrastructure, and business-friendly policies, DMCC has earned recognition as the "Global Free Zone of the Year" by the Financial Times' fDi Magazine multiple times.</p>
+
+                        <h3>Key Features and Benefits</h3>
+                        
+                        <h4>1. 100% Ownership and Tax Advantages</h4>
+                        <p>One of the most significant benefits of establishing a business in DMCC is the ability to retain 100% foreign ownership. Additionally, companies enjoy zero corporate and personal income tax, making it a highly cost-effective option for businesses.</p>
+
+                        <h4>2. Strategic Location</h4>
+                        <p>DMCC is located in Jumeirah Lakes Towers (JLT), a prime area in Dubai that offers excellent connectivity. It's close to major highways, Dubai International Airport, and the Jebel Ali Port, making it an ideal base for businesses with global operations.</p>
+
+                        <h4>3. Wide Range of Business Activities</h4>
+                        <p>DMCC supports over 20,000 businesses across various sectors, including:</p>
+                        <ul>
+                            <li>Precious metals and gemstones trading</li>
+                            <li>Energy and commodities trading</li>
+                            <li>Technology and fintech</li>
+                            <li>Retail and e-commerce</li>
+                        </ul>
+                        <p>This diversity allows businesses to operate within a dynamic and collaborative environment.</p>
+
+                        <h4>4. Streamlined Business Setup</h4>
+                        <p>The DMCC authority has simplified the business setup process, offering end-to-end support. Key services include:</p>
+                        <ul>
+                            <li>Online company registration</li>
+                            <li>Assistance with licensing and visa processing</li>
+                            <li>Flexible office solutions tailored to business needs</li>
+                        </ul>
+
+                        <h4>5. State-of-the-Art Facilities</h4>
+                        <p>DMCC offers world-class infrastructure, including Grade A office spaces, modern warehouses, and retail outlets. Additionally, the free zone provides access to advanced digital platforms, enabling businesses to operate efficiently.</p>
+
+                        <h4>6. Networking Opportunities</h4>
+                        <p>DMCC hosts numerous events, workshops, and trade exhibitions, providing businesses with opportunities to network and collaborate. This ecosystem fosters innovation and growth, helping companies expand their reach.</p>
+
+                        <h3>Setting Up a Business in DMCC</h3>
+                        <p>To establish a company in DMCC Free Zone, follow these steps:</p>
+                        <ul>
+                            <li>Choose Your Business Activity: Determine the category and scope of your business operations</li>
+                            <li>Register Your Company: Submit the required documents, including a business plan, passport copies, and application forms</li>
+                            <li>Secure a License: Obtain the appropriate trade, service, or industrial license</li>
+                            <li>Lease Office Space: Choose from flexi-desks, serviced offices, or physical office spaces based on your needs</li>
+                            <li>Apply for Visas: Process visas for yourself, employees, and dependents</li>
+                        </ul>
+
+                        <h3>Why Choose DMCC?</h3>
+                        <p>DMCC stands out for its commitment to providing a seamless business environment. Whether you're a startup, SME, or multinational corporation, the free zone's tailored solutions cater to diverse business needs. Additionally, its focus on innovation, sustainability, and digital transformation ensures that businesses remain competitive in the global market.</p>
+
+                        <h3>Final Thoughts</h3>
+                        <p>The DMCC Free Zone is more than just a business hub; it's a gateway to global opportunities. With its strategic location, supportive infrastructure, and vast network of businesses, DMCC empowers companies to thrive in Dubai's dynamic economy. If you're considering setting up a business in the UAE, DMCC Free Zone should be at the top of your list.</p>
+                    </div>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </article>
+
+            <!-- Fourth Blog Post -->
+            <article class="blog-post">
+                <img src="blog/Golden visa.jpg" alt="UAE Golden Visa Guide">
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span><i class="far fa-calendar"></i> December 18, 2024</span>
+                        <span><i class="far fa-user"></i> Admin</span>
+                    </div>
+                    <h2 class="post-title">Guide to UAE Golden Visa Applications</h2>
+                    <p class="post-excerpt">The UAE Golden Visa is a long-term residency visa designed to attract top talent, investors, and professionals to the United Arab Emirates. Offering a 5- or 10-year renewable residency, the Golden Visa has become a sought-after opportunity for individuals seeking stability, career growth, and investment prospects in the UAE...</p>
+                    <div class="full-post">
+                        <h3>What is the UAE Golden Visa?</h3>
+                        <p>Introduced in 2019, the UAE Golden Visa provides long-term residency to eligible individuals without the need for a local sponsor. The visa also grants the holder the ability to sponsor family members, including spouses, children, and domestic workers, offering unparalleled security and convenience.</p>
+
+                        <h3>Who is Eligible for the UAE Golden Visa?</h3>
+                        
+                        <h4>1. Investors</h4>
+                        <ul>
+                            <li>Individuals investing in real estate, businesses, or public investments may qualify</li>
+                            <li>Real estate investors must invest a minimum of AED 2 million in property</li>
+                        </ul>
+
+                        <h4>2. Entrepreneurs</h4>
+                        <ul>
+                            <li>Founders of startups registered in the UAE</li>
+                            <li>Entrepreneurs with successful projects or ideas backed by recognized business incubators</li>
+                        </ul>
+
+                        <h4>3. Specialized Talents and Researchers</h4>
+                        <ul>
+                            <li>Doctors, engineers, scientists, and specialists in technology or other high-demand fields</li>
+                            <li>Applicants must demonstrate significant contributions to their field</li>
+                        </ul>
+
+                        <h4>4. Outstanding Students and Graduates</h4>
+                        <ul>
+                            <li>High-performing students in UAE schools and universities</li>
+                            <li>Graduates from the top 100 universities worldwide with exceptional academic records</li>
+                        </ul>
+
+                        <h4>5. Humanitarian Pioneers</h4>
+                        <p>Individuals making outstanding contributions to charitable or humanitarian efforts.</p>
+
+                        <h4>6. Cultural and Creative Professionals</h4>
+                        <p>Artists, writers, and other cultural professionals recognized for their contributions.</p>
+
+                        <h3>Benefits of the UAE Golden Visa</h3>
+                        <ul>
+                            <li>Long-term Residency: A 5- or 10-year renewable visa</li>
+                            <li>Family Sponsorship: Include dependents such as spouses and children</li>
+                            <li>Business Opportunities: Ease of establishing and operating businesses</li>
+                            <li>Stability: No need for a local sponsor or employer</li>
+                            <li>Exclusive Benefits: Access to special packages for banking, healthcare, and real estate</li>
+                        </ul>
+
+                        <h3>How to Apply for the UAE Golden Visa</h3>
+                        
+                        <h4>Step 1: Determine Eligibility</h4>
+                        <p>Review the eligibility criteria for your category and gather necessary supporting documents, such as:</p>
+                        <ul>
+                            <li>Passport copies</li>
+                            <li>Proof of investment (for investors)</li>
+                            <li>Academic qualifications (for students and researchers)</li>
+                            <li>Employment contracts or letters of recommendation (for professionals)</li>
+                        </ul>
+
+                        <h4>Step 2: Submit Your Application</h4>
+                        <p>Applications can be submitted through the following channels:</p>
+                        <ul>
+                            <li>UAE Federal Authority for Identity and Citizenship (ICA): For individuals outside of Dubai</li>
+                            <li>General Directorate of Residency and Foreigners Affairs (GDRFA): For individuals applying within Dubai</li>
+                        </ul>
+                        <p>You can apply online through the official portals or engage the services of a PRO (Public Relations Officer) to handle the process.</p>
+
+                        <h4>Step 3: Verification and Approval</h4>
+                        <p>Authorities will review your application and may request additional documents or an interview. Once approved, you'll receive a confirmation and instructions to finalize your visa.</p>
+
+                        <h4>Step 4: Finalize Residency Visa</h4>
+                        <p>Upon approval, proceed to:</p>
+                        <ul>
+                            <li>Complete your medical test</li>
+                            <li>Register for Emirates ID</li>
+                            <li>Stamp the residency visa on your passport</li>
+                        </ul>
+
+                        <h3>Key Considerations</h3>
+                        <ul>
+                            <li>Ensure all documentation is accurate and complete to avoid delays</li>
+                            <li>Renew your visa on time to maintain residency</li>
+                            <li>Stay updated with changes in Golden Visa regulations and criteria</li>
+                        </ul>
+
+                        <h3>Final Thoughts</h3>
+                        <p>The UAE Golden Visa is a game-changer for those looking to establish a long-term presence in one of the world's most dynamic economies. Whether you're an investor, entrepreneur, professional, or student, the Golden Visa offers unmatched opportunities for personal and professional growth. By understanding the process and meeting the requirements, you can unlock the door to a brighter future in the UAE.</p>
+                    </div>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </article>
+        </main>
+
+        <aside class="sidebar">
+            <div class="sidebar-widget">
+                <h3 class="widget-title">Categories</h3>
+                <ul class="categories-list">
+                    <li><a href="#">Business Formation</a></li>
+                    <li><a href="#">Legal Services</a></li>
+                    <li><a href="#">Visa & Immigration</a></li>
+                    <li><a href="#">Corporate Law</a></li>
+                    <li><a href="#">Business Compliance</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-widget">
+                <h3 class="widget-title">Recent Posts</h3>
+                <ul class="recent-posts-list">
+                    <li><a href="#">Latest Updates on UAE Business Laws</a></li>
+                    <li><a href="#">How to Choose the Right Business Structure</a></li>
+                    <li><a href="#">Essential Documents for Company Registration</a></li>
+                    <li><a href="#">Understanding VAT Regulations in UAE</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 El Amrani Consultancies. All Rights Reserved.</p>
+        <p>
+            <i class="fas fa-phone"></i> <a href="tel:+971525720497" style="color: white; text-decoration: none;">+971 52 572 0497</a> |
+            <i class="fas fa-envelope"></i> <a href="mailto:legal@elamrani.info" style="color: white; text-decoration: none;">legal@elamrani.info</a>
+        </p>
+    </footer>
+
+    <a href="https://wa.me/971525720497" class="whatsapp-button" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hide all full posts initially
+            document.querySelectorAll('.full-post').forEach(post => {
+                post.style.display = 'none';
+            });
+
+            // Add click handlers to all read more buttons
+            document.querySelectorAll('.read-more').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const article = this.closest('.blog-post');
+                    const fullPost = article.querySelector('.full-post');
+                    const excerpt = article.querySelector('.post-excerpt');
+
+                    if (fullPost.style.display === 'none') {
+                        // Show full post
+                        fullPost.style.display = 'block';
+                        excerpt.style.display = 'none';
+                        this.textContent = '← Show Less';
+                        // Scroll to top of article
+                        article.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        // Show excerpt
+                        fullPost.style.display = 'none';
+                        excerpt.style.display = 'block';
+                        this.textContent = 'Read More →';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

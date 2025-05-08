@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Between the Realms</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Base styles */
+        :root {
+            --header-height: 90px;
+            --menu-width: 280px;
+            --primary-color: #003366;
+            --text-color: #333;
+            --transition-speed: 0.3s;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Cormorant Garamond', serif;
+            overflow-x: hidden;
+            background: #f5f5f5;
+            color: var(--text-color);
+        }
+
+        /* Burger Menu Button */
+        .burger-menu {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1002;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .burger-menu i {
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        /* Navigation Menu */
+        .side-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: var(--menu-width);
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            z-index: 1001;
+            overflow-y: auto;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        /* Navigation Content */
+        .nav-content {
+            padding: 2rem;
+            padding-top: calc(var(--header-height) + 1rem);
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item {
+            margin: 0.5rem 0;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 0.8rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            border-left: 3px solid transparent;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .nav-link:hover {
+            background: #f0f0f0;
+            border-left-color: var(--primary-color);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--menu-width);
+            padding: 2rem;
+            transition: margin var(--transition-speed) ease;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 1024px) {
+            .burger-menu {
+                display: block;
+            }
+
+            .side-nav {
+                transform: translateX(-100%);
+            }
+
+            .side-nav.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+
+            /* Overlay when menu is open */
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.5);
+                z-index: 1000;
+            }
+
+            .overlay.active {
+                display: block;
+            }
+        }
+
+        /* Close button for mobile */
+        .close-nav {
+            display: none;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        @media (max-width: 1024px) {
+            .close-nav {
+                display: block;
+            }
+        }
+
+        /* Content sections */
+        .section {
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Ensure smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Book Header Styles */
+        .book-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            z-index: 999;
+            background: var(--primary-color);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cover-container {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .cover-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0.9;
+        }
+
+        .book-title {
+            position: static;
+            font-size: 2rem;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin: 0 60px 0 20px;
+            padding-left: 20px;
+        }
+
+        /* Updated Burger Menu styles */
+        .burger-menu {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1002;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: calc((100% - 1200px) / 2);
+        }
+
+        .burger-menu i {
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        .burger-menu.open {
+            background: var(--primary-color);
+        }
+
+        .burger-menu.open i {
+            color: white;
+        }
+
+        /* Updated Main Content styles */
+        .main-content {
+            margin-top: 100px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 20px;
+        }
+
+        /* Chapter Image Container styles */
+        .chapter-image-container {
+            width: 100%;
+            height: 300px;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .chapter-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .chapter-image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Updated Section styles */
+        .section {
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 768px) {
+            .book-header {
+                height: 60px;
+            }
+
+            .book-title {
+                font-size: 1.5rem;
+                margin: 0 40px 0 20px;
+            }
+
+            .main-content {
+                margin-top: 80px;
+            }
+
+            .chapter-image-container {
+                height: 200px;
+            }
+
+            .writer-section {
+                margin-top: 170px;
+            }
+        }
+
+        #between-realms h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: #003366;
+            margin-bottom: 2rem;
+        }
+
+        .chapter-content {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.8;
+            margin-top: 2rem;
+        }
+
+        .chapter-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        .source-link {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .source-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        .source-link a:hover {
+            text-decoration: underline;
+        }
+
+        .back-home {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1002;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .back-home:hover {
+            background: #004d99;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .back-home i {
+            font-size: 1.1rem;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .back-home {
+                top: auto;
+                bottom: 20px;
+                left: auto;
+                right: 20px;
+                transform: none;
+                font-size: 0.9rem;
+                padding: 8px 16px;
+            }
+        }
+
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1002;
+            background: #25D366;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-button i {
+            font-size: 1.8rem;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Tooltip */
+        .whatsapp-button .tooltip {
+            position: absolute;
+            left: 60px;
+            background: #333;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-family: 'Montserrat', sans-serif;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .whatsapp-button .tooltip::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent #333 transparent transparent;
+        }
+
+        .whatsapp-button:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .whatsapp-button {
+                width: 45px;
+                height: 45px;
+            }
+
+            .whatsapp-button i {
+                font-size: 1.5rem;
+            }
+        }
+
+        .writer-section {
+            padding: 2rem;
+            margin-top: 220px;
+        }
+
+        .writer-image-container {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            margin: 0 auto 2rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .writer-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .writer-image:hover {
+            transform: scale(1.05);
+        }
+
+        .writer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .writer-section {
+                margin-top: 120px;
+                padding: 1rem;
+            }
+
+            .writer-image-container {
+                height: 300px;
+            }
+        }
+
+        /* Ensure proper spacing for very small screens */
+        @media (max-width: 480px) {
+            .book-title {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Navigation Layout */
+        :root {
+            --nav-width: 280px;
+            --nav-collapsed-width: 60px;
+            --header-height: 80px;
+        }
+
+        /* Navigation Toggle Button */
+        .nav-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1002;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Side Navigation */
+        .side-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: var(--nav-width);
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1001;
+        }
+
+        .side-nav.open {
+            transform: translateX(0);
+        }
+
+        /* Navigation Content */
+        .nav-content {
+            height: 100%;
+            padding: 20px;
+            padding-top: var(--header-height);
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item {
+            margin: 10px 0;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link i {
+            width: 24px;
+            margin-right: 12px;
+        }
+
+        .nav-link:hover {
+            background: #f0f0f0;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 0;
+            padding: 20px;
+            transition: margin 0.3s ease;
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 1024px) {
+            .side-nav {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: var(--nav-width);
+            }
+
+            .nav-toggle {
+                display: none;
+            }
+
+            .overlay {
+                display: none;
+            }
+        }
+
+        /* Mobile/Tablet Styles */
+        @media (max-width: 1023px) {
+            .side-nav {
+                transform: translateX(-100%);
+            }
+
+            .side-nav.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        /* Update Introduction Section styles */
+        #introduction {
+            padding: 35px;
+            margin: 10px 30px 30px var(--nav-width); /* Changed from 30px to 10px top margin */
+        }
+
+        .writer-section {
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .writer-content {
+            padding: 2rem 0;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 1023px) {
+            #introduction {
+                margin: 10px 15px 15px 15px; /* Changed from 30px to 10px top margin */
+                padding: 25px;
+            }
+
+            .writer-section {
+                padding: 1.5rem;
+            }
+
+            .writer-content {
+                padding: 1.5rem 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #introduction {
+                margin: 10px 12px 12px 12px; /* Changed from 30px to 10px top margin */
+                padding: 20px;
+            }
+
+            .section {
+                margin: 12px 8px; /* Reduced from 15px 10px */
+                padding: 12px;
+            }
+        }
+
+        /* Chapter Section styles */
+        .section {
+            padding: 25px; /* Reduced from 30px */
+            margin: 25px 25px 25px var(--nav-width); /* Reduced from 30px */
+        }
+
+        /* Specific styling for chapters (excluding introduction) */
+        .section:not(#introduction) {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .chapter-content {
+            padding: 1.5rem 0; /* Reduced from introduction's 2rem */
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 1023px) {
+            .section {
+                margin: 15px 12px; /* Reduced from 20px 15px */
+                padding: 15px;
+            }
+
+            .chapter-content {
+                padding: 1rem 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                margin: 12px 8px; /* Reduced from 15px 10px */
+                padding: 12px;
+            }
+        }
+
+        /* Add Arabic font import */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
+
+        /* Arabic text specific styles */
+        .arabic-text {
+            font-family: 'Noto Naskh Arabic', serif;
+            font-size: 1.3rem;
+            line-height: 2;
+            text-align: right;
+            direction: rtl;
+            color: var(--text-color);
+            padding: 2rem 0;
+            margin: 1rem 0;
+        }
+
+        /* Add this to your existing CSS styles */
+        .language-divider {
+            margin: 2rem 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+            position: relative;
+        }
+
+        .language-divider::after {
+            content: '✽';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 0 1rem;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Add this after the opening body tag and before the burger menu button -->
+    <header class="book-header">
+        <div class="cover-container">
+            <img src="book/cover.jpg" alt="Between the Realms Cover" class="cover-image">
+            <h1 class="book-title">Between The Realms</h1>
+        </div>
+    </header>
+
+    <!-- Add this after the header section and before the chapter generation -->
+    <section id="introduction" class="section">
+        <div class="writer-section">
+            <div class="writer-image-container">
+                <img src="book/Writer.jpeg" alt="Writer" class="writer-image">
+            </div>
+            <div class="writer-content">
+                <h2>Introduction</h2>
+                <div class="chapter-content">
+                    <p>Dear reader,</p>
+                    <p>This text comes to you at a time that cannot be described as good, a time when written creativity, in particular, has become almost completely abandoned. It is very rare to find people who read books, especially in our Arab societies, which still haven't achieved the first level of Maslow's Hierarchy of Needs.</p>
+                    <p>Moreover, the current era is a digital one par excellence, and the best proof of this is that you are reading this book digitally. We are not against the digital revolution, quite the contrary. However, I cannot help but say that this digital wealth has made societies move quickly and constantly in a hurry, while books love those who take their time.</p>
+                    <p>Without mourning the past, I present to you, dear reader, this creative and human experience, which I have no doubt will transport you – even if for a few moments – from our noisy world to a world where things move very slowly. A world where you can hear Al-Mutanabbi in the streets of Paris, in a parallel world where one does not know which to choose.</p>
+                    <p>Many years have passed since this work was written, as the opportunity was not available for us to publish it. Now that the opportunity has presented itself, I hope it will meet with your approval.</p>
+                    
+                    <div class="language-divider"></div>
+                    
+                    <div class="arabic-text">
+                        <p>عزيزي القارئ</p>
+                        <p>إن هذا النص الذي بين يديك الآن قد أتى في مرحلة زمنية لا يمكننا أن نصفها بالجيدة، مرحلة أضحى فيه الإبداع المكتوب بصفة خاصة، شبه مهجور تماما، حيث أنه من النادر جدا أن تجد الكتب من يقرؤها، وخاصة في مجتمعاتنا العربية التي لاتزال لم تحقق المرحلة الأولى من هرم ماسلو.</p>
+                        <p>إضافة إلى ذلك، المرحلة الراهنة هي مرحلة رقمية بامتياز، وخير دليل على ذلك هو أنك تقرأ هذا الكتاب رقميا، ولسنا ضد الثورة الرقمية بل على العكس من ذلك، لكن لا أغفل القول بأن هذه الثروة الرقمية جعلت المجتمعات تخطو سريعا ودائما في عجلة من أمرها، والكتاب يحب الذين يتأنون.</p>
+                        <p>من غير أن نبكي على الأطلال، أقدم لك عزيزي القارئ هذه التجربة الإبداعية والإنسانية التي لا أشك في أنها ستنتشلك -ولو للحظات- من عالمنا الصاخب الذي إلى عالم تتحرك فيه الأشياء ببطء شديد، إلى عالم يمكنك أن تسمع فيه المتنبي في شوارع باريس في عوالم موازية لا يدري فيه المرء أيهما يختار.</p>
+                        <p>لقد مر على هذا العمل سينين عدة، حثت لم تكن الفرصة سانحة لنا كي نقوم بنشره، والآن إذ سنحت لنا الفرصة، فأرجو أن ينال استحسانكم.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Burger Menu Button -->
+    <button class="burger-menu" aria-label="Open navigation menu">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Add this button after the burger menu button -->
+    <button class="back-home">
+        <i class="fas fa-home"></i> Back to Home
+    </button>
+
+    <!-- Add this button after the back-home button -->
+    <a href="https://wa.me/+971525720497" class="whatsapp-button" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+        <span class="tooltip">Chat with us!</span>
+    </a>
+
+    <!-- Navigation Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Side Navigation -->
+    <nav class="side-nav">
+        <button class="close-nav" aria-label="Close navigation menu">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="nav-content">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="#introduction" class="nav-link">Introduction</a>
+                </li>
+                <!-- Chapters will be added here via JavaScript -->
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Chapter sections will be added here via JavaScript -->
+    </main>
+
+    <script>
+        // DOM Elements
+        const burgerMenu = document.querySelector('.burger-menu');
+        const closeNav = document.querySelector('.close-nav');
+        const sideNav = document.querySelector('.side-nav');
+        const overlay = document.querySelector('.overlay');
+        const navList = document.querySelector('.nav-list');
+        const mainContent = document.querySelector('.main-content');
+
+        // Generate chapters
+        const chapterCount = 12;
+        
+        function generateChapterContent(chapterNum) {
+            // Special content for Chapter 1
+            if (chapterNum === 1) {
+                return `
+                    <div class="chapter-image-container">
+                        <img src="book/between%20the%20realms.jpg" alt="Between the Realms - Chapter ${chapterNum}">
+                    </div>
+                    <h2>Chapter ${chapterNum}</h2>
+                    <div class="chapter-content">
+                        <p>When I was young, I used to walk barefoot, wearing a loose shirt and shorts. Sometimes I would walk barefoot, and sometimes with whatever footwear was available. My feet were constantly bleeding; no sooner would one wound heal than another would appear. This was due to the abundance of thorns and stones I walked on.</p>
+                        <p>Back then, I lived in a place called "The Forgotten Corner," in a village whose name might have inspired the name of my corner. It was filled with cacti, surrounding it on all sides. Wherever you went, you would find them to your right and left, scattered everywhere. The village had a concave shape, surrounded by mountains and hills on all sides. A small river flowed through it, making it resemble a cracked cup.</p>
+                        <p>The village was covered with trees, making it impossible to see the houses from afar. The villagers wore djellabas and large shoes, in line with the requirements of the environment they lived in. Farming was the only dominant activity in the village; the people there lived and fed on what they produced from their crops.</p>
+                        <p>The village had no place for entertainment except for a single café, which was the only refuge for the villagers to relax and unwind. Mr. Abdullah was the spiritual father of this café and its owner. He oversaw its management and prepared the teacups, each topped with a layer of foam as a sign of its quality.</p>
+                        
+                        <div class="language-divider"></div>
+                        
+                        <div class="arabic-text">
+                            <p>وأنا لازلت صغيرا كنت أمشي حافي القدمين، أرتدي قميصا فضفاضا وسروالا قصيرا، تارة كنت أمشي حافي القدمين وتارة ما تيسر وجوده، كانت قدماي في كل حين وآن تذرف دما، فما يكاد يندمل جرح حتى تكون قدماي قد أصيبت بجرح آخر، كان ذلك بسبب كثرة الشوك والحجر الذي كنت أمشي عليهما.</p>
+                            <p>كنت أسكن حينها في مكان يدعى الركن المنسي في قرية ربما اشتق اسم ركني من اسمها، كانت مليئة بنبات الصبار حيث كان يحيط بها من كل جانب وحيثما توجهت تجده على يمينك وعلى شمالك منثورا في كل مكان، وكانت القرية ذات شكل مقعر تحيط بها الجبال والروابي من كل جانت، وكان هناك نهر صغير يخترقها فيجعلها كفنجان مشقوق.</p>
+                            <p>وكانت القرية مكسوة بالأشجار بحيث لا يمكنك رؤية المنازل من بعيد، وكان أهل القرية يلبسون الجلابيب وأحذية كبيرة تبعا لمتطلبات البيئة التي يحيونا بها، وكان النشاط الفلاحي هو النشاط الوحيد المسيطر في القرية، فالناس هناك يعيشون ويقتاتون على ما ينتجون في محاصيلهم الفلاحية.</p>
+                            <p>ولم تكن القرية تتوفر على أي مكان للترفيه سوى مقهى وحيدة، إذ تعد هي الملتجأ الوحيد لأهل القرية في الترويح على النفس، وكان السيد عبد الله هو الأب الروحي لهذه المقهى وصاحبها، يسهر على ادارتها وتجهيز كؤوس الشاي التي تعلوها رزة من الرغوة علامة على جودتها.</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Special content for Chapter 2
+            if (chapterNum === 2) {
+                return `
+                    <div class="chapter-image-container">
+                        <img src="book/abdullah-cafe.jpg" alt="Abdullah's Cafe - Chapter ${chapterNum}">
+                    </div>
+                    <h2>Chapter ${chapterNum}</h2>
+                    <div class="chapter-content">
+                        <p>In the evening, both farmers and unemployed people would gather at Abdullah's café, their faces bearing clouds of exhaustion. They would circle around a table to play card games of various kinds and particularly dice, as the latter reflected the meaning of their limited lives with narrow possibilities. While sipping cups of tea, each would take out their long pipe and a bundle of prepared cannabis for smoking, while others would take out ground tobacco to be consumed in different ways through the nose and mouth down to their toes. Voices would rise in a noisy atmosphere as smoke filled the place and draped its curtains like a thick fog settling over the space. Between nine and ten o'clock, the farmers would begin to leave, and only the unemployed would remain, whom their simple dreams have worn out their bodies.</p>
+                        
+                        <p>Back then, I preferred to sit alone. I would talk to myself and spend long moments contemplating the open universe around me, wondering: Who am I? Why do humans live? Where did I come from? What do I want from this life if everyone complains of its injustice? I often heard people complaining and grumbling about their lives that barely have any value.</p>
+                        
+                        <p>Sometimes I would go out to a large square in the middle of the neighborhood where those without work would sit, along with anyone who wanted to watch life pass by without greeting those seated or bothering to ask about their condition. There, where they sat on tree trunks and engaged in conversations that souls found sweet as a way to ease their burden or attempt to kill reality by ignoring it and pretending it didn't exist, I would listen to them talk. One would ask, "How can we be happy? How can we escape our misery, our hunger, our war...?"</p>
+                        
+                        <p>Barely would one finish speaking another one would interrupt, saying: "Happiness is exclusive to the rich, they have it all to themselves, while we are nothing but puppets in the hands of fate or lab rats for those who will come after..."</p>
+                        
+                        <p>While I was immersed in my amazement and bewilderment, I decided this would be my dream to live and die for. I must obtain this happiness that everyone, young and old, talks about, and I won't let it remain exclusive to the wealthy, without first asking myself: What is happiness in the first place?</p>
+                        
+                        <p>No... one must first define what they're searching for before having the right to look for it. Yes, indeed, but what am I searching for? Ah, I remembered something called happiness, but is knowing the name enough to understand the essence of what one seeks? Despite this, I remember hearing some people say: "To be happy means to be smiling."</p>
+                        
+                        <p>No matter, I will do my utmost, and if it requires spending my life searching for this thing called happiness, so be it. Or perhaps I'll become wealthy and possess it. I must obtain it, I'll try, I'll make my effort and strive, for man gets what he strives for, and his striving will surely be crowned with seeing and being rewarded with happiness as the fullest reward.</p>
+                        
+                        <div class="language-divider"></div>
+                        
+                        <div class="arabic-text">
+                            <p>في المساء كان يلتحق الفلاحون والعاطلون على حد سواء لمقهى عبد الله وعلى وجوههم سحابة من التعب فيتحلقون على طاولة كي يلعبوا لعبة الأوراق بأشكالها والنرد على  وجه الخصوص، إذ أن هذا الأخير  يعكس معنى حياتهم المحددة والضيقة الاحتمالات، وبينما هم يحتسون كؤوس الشاي كل منهم يخرج سبسيه الطول ورزمة من القنب الهدي المقصوص والمعد للتدخين، والبعض الآخر يخرج رزمة من التبغ المطحون الذي يتم تعاطيه بأشكال مختلفة عبر الأنف والفم إلى أصابيع القدمين، وكانت الأصوات تتعالى في جو صاخب وقد ملء الدخان المكان وأرخى عليه أستاره كضباب كثيف أطبق على المكان، وبين الساعة التاسعة والعاشرة يبدأ الفلاحون بالانصراف ولا يتبقى هناك سوى العاطلين الذين أرهقت كهولهم أحلامهم البسيطة.</p>
+                            
+                            <p>كنت حين ذاك أثير الجلوس وحدي، كنت أحدث نفسي وأطيل التأمل في الكون المفتوح من حولي، أتساءل من أنا؟ ولماذا يعيش الإنسان؟ ومن أين جئت؟ ماذا أريد من هذه الحياة إن كان الكل يشتكي من جورها؟ كنت أسمع كثيرا من الناس يشتكون ويتضمرون من حياتهم التي لا تكاد تقوم لها قائمة.</p>
+                            
+                            <p>وأحيانا كنت أخرج إلى ساحة كبيرة وسط الحي التي كان يجلس فيها كل من لا عمل له وكل من أراد أن يشاهد الحياة وهي تمر بالجوار دون أن تلقى السلام على الجالسين أو تكلف نفسها وتسأل عن حالهم، هناك حيث يجلسون على جدوع الأشجار ويخوضون في أحاديث تستعذها الأنفس كنوع من التخفيف على النفس أو محاولة قتل الواقع عن طريق تجاهله واعتباره كأن لم يكن، كنت أصغي إليهم وهم يتحدثون، فيسأل أحدهم: "كيف نكون سعداء؟" كيف نخرج من بؤسنا، من جوعنا، من حربنا...؟</p>
+                            
+                            <p>فما يكاد يتمم كلامه حتى يقاطع أحدهم قائلا: السعادة خاصة بالأغنياء يختصون بها دونا عن العالمين، أما نحن فلا نعدو أن نكون دمى في أيدي القدر أو فئران تجارب لمن سيأتون بعد...</p>
+                            
+                            <p>وبينما أنا غارق في دهشتي واستغرابي، قررت أن هذا هو حلمي من أجله أحيا ومن أجله أموت، لا بد أن أحصل على هذه السعادة التي يتحدث عنها الكبير  والصغير ولن أدعها حكرا على الأغنياء، دون أن أسأل نفسي: ما هي السعادة قبل كل شيء؟</p>
+                            
+                            <p>لالا،.. يجب على المرء أولا أن يحدد ضالته ثم بعدها يكون له الحق في البحث عنها، نعم فعلا، وما هي ضالتي أنا؟ آآ، تذكرت شيء اسمه السعادة، ولكن هل تكفي معرفة الاسم كي يعرف المرء كنه الشيء الذي يبحث عنه، لكن بالرغم من هذا، أذكر أنني سمعت جماعة يقولون: "أن تكون سعيدا معناه أن تكون مبتسما"</p>
+                            
+                            <p>لا بأس سأبذل قصارى جهدي وإن تطلب الأمر أن أفني عمري في البحث عن هذه التي تسمى السعادة فلا بأس عندي، أو ربما أصبح من الأغنياء فأمتلك رقبتها، لابد أن أظفر بها، سأحاول، سأدلي بدلوي وأسعى سعيي وأن للإنسان ما سعى وأن سعيه حتما سيكلل بأن يرى ويجزى بالسعادة الجزاء الأوفى.</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Special content for Chapter 3
+            if (chapterNum === 3) {
+                return `
+                    <div class="chapter-image-container">
+                        <img src="book/the journey start.webp" alt="The Journey Start - Chapter ${chapterNum}">
+                    </div>
+                    <h2>Chapter ${chapterNum}</h2>
+                    <div class="chapter-content">
+                        <p>I packed my bag and left my forgotten corner, trying to forget it as I searched for my purpose here and there. After a journey that took nine days or perhaps a few hours more, while I continued walking, I saw two girls smiling and swaying together, one tapping the other's hand. At that moment, I stood thinking deeply, saying to myself about happiness, "Perhaps the meeting will be soon."</p>
+
+                        <p>As night drew its curtains, I occupied a corner in a café near the shore. I spent the entire night there immersed in thought. I had become a house inhabited by the idea of happiness and the obsession of searching for it. Shortly before sunrise, I rose to resume my search anew, but to my misfortune, after searching and toiling, the results yielded nothing notable. Yet truly, this cannot diminish my determination nor undermine my strength in finding what I've resolved to find. I continue the search whenever the sun casts its light, until after a time of searching, I became convinced that this thing I call happiness is nothing more than an illusion that doesn't exist...</p>
+
+                        <p>I carried my bag again, returning to my forgotten corner. Night darkened around me as I spoke to myself, "Why don't I call out to this happiness? Perhaps it's nearby," even though I had become convinced it was nothing more than an illusion. I'll try, perhaps this illusion might be close to me, and I began shouting at the top of my voice: "My happiness...!!! My happiness...!!! My happiness!!!"</p>
+
+                        <p>Suddenly, I thought I heard a sound. I waited a little, trying to identify its source, and discovered it was the sound of an owl. Perhaps it too was calling for its happiness or lamenting its miserable fate. I then returned to my forgotten corner and leaned against a wall, exhausting myself with thought. After a while, it was as if something whispered to me: "You must take happiness from those two girls you saw the first time."</p>
+
+                        <p>What! Should I steal!?</p>
+
+                        <p>This is against my principles and morals and not how I was raised!!!</p>
+
+                        <p>I struck my forehead with my hand, actually saying: I've found it! How did this idea not occur to me from the beginning... No sooner had evening come than I found myself in that place waiting for the sought-after happiness, even though I didn't believe in its existence. But there's no harm in trying until I replace uncertainty with certainty. Shortly after, I turned my head to the right, and there I saw the two girls coming toward me. I was struck with severe confusion, and my heartbeat rose as if I were in a predicament or on a first romantic date with Venus as my beloved. I had forgotten something: how would I steal this happiness? This was something I hadn't thought about before. While I was drowning in my confusion, not knowing what to do, it was as if a devil whispered to me, suggesting: "Imitate them." I said to myself, this is easier than returning empty-handed and disappointed.</p>
+
+                        <p>There they are approaching, with smiles illuminating their faces. What should I do, I wonder...! I began looking and smiling, prolonging my smile. When they passed me, one of them looked back while I watched them moving away from my sight. I started walking behind them with the smile on my face as if it were painted with oil paint, unaffected by external factors. While I was enjoying my steps and celebrating the glimmer of my victory, I felt that I wasn't following the two girls for happiness but for something else, I don't know what it is... What is it? A strange feeling overtakes me towards one of them only, the one who kept looking back. I felt as if someone was placing a piece of ice on my heart, or something hot, or... or..., I don't know how to say or describe what falls outside the boundaries of language and beyond what words can carry...</p>
+
+                        <p>Yes, yes... I remembered, perhaps it's that feeling one falls into when meeting someone of the opposite gender. But couldn't that feeling be what they call love!!! The symptoms I'm experiencing suggest so, but what is love? This is a problematic concept, let's leave it aside, for whatever the answer may be, it remains highly relative.</p>
+
+                        <p>One of my friends used to say that love is being alone with a girl, exchanging kisses and embracing her, but I've never done this at all. So what is this that I'm feeling, could it be infatuation? Ah, I remembered, perhaps it's a type of illusion that I was searching for earlier, or maybe it's something I cannot comprehend. More exhausting than the search is what's being searched for...</p>
+
+                        <p>I began talking to myself saying: Return to your forgotten corner and forget everything, return to continue your life there in complete freedom, forgotten, with no one asking about you or disturbing your worried mood.</p>
+
+                        <p>And was I even living!!!</p>
+
+                        <p>No, you're still dreaming of living.</p>
+
+                        <p>Won't you guide me to a faster solution to enter this life?</p>
+
+                        <p>You're almost touching its door then you hold back...</p>
+
+                        <p>Oh, spare me this hollow monologue that serves no purpose and yields no benefit.</p>
+
+                        <div class="language-divider"></div>
+
+                        <div class="arabic-text" dir="rtl">
+                            <p>جهزت حقيبتي وهجرت ركني المنسي، وحاولت أن أنساه وغدوت أفتش عن ضالتي هنا وهناك، وبعد رحلة استغرقت تسعة أيام أو تزيد على ذلك بضع ساعات، وبينما أنا أواصل المسير أبصرت فتاتين تبتسمان وتتمايلان على بعضهما البعض وتضرب احداهن على يدي الأخرى، في هذه الأثناء وقفت مليا أفكر قائلا في نفسي للسعادة "لعل اللقاء يكون قريبا".</p>
+
+                            <p>أسدل الليل أستاره، استلمت ركنا بمقهى مجاور للشاطئ، قضيت الليلة كاملة هناك منغمس في التفكير، لقد أضحيت بيت تسكنه فكرة السعادة وهاجس البحث عنها، وقبل بزوغ الشمس بقليل نهضت لأستأنف رحلة البحث من جديد، ولكن يا لخيبت حظي بعد تفتيش وكد لم تسفر النتائج عن شيء يذكر، لكن هذا حقا لا يمكنه أن ينال من عزيمتي ولا أن يقوض من قوتي في سبيل ايجاد عما عزمت عن ايجاده، ولازلت أستأنف البحث كلما القت الشمس بنورها، حتى أنني وبعد زمن من البحث أيقنت أن هذه التي أطلق عليها اسم السعادة، لا تعدو ان تكون ضربا من الوهم الذي لا وجود له ...</p>
+
+                            <p>حملت حقيبتي من جديد قافلا إلى ركني المنسي.. أظلم علي الليل وأنا أحدث نفسي "لماذا لا أنادي على هذه السعادة لعلها تكون بالجوار" وإن كنت قد أيقنت أنها لا تعدو أن تكون ضربا من الوهم. لأجرب لعل هذا الوهم يكون مني قريب، وبدأت أصيح بأعلى صوتي: سعادتي ..!!! سعادتي..!!!  سعادتي!!!</p>
+
+                            <p>فإذا بي كأني أسمع صوتا، تريثت قليلا  أحاول أن أعرف مصدر الصوت، اكتشفت حينها أنه صوت طائر البوم، ربما هو الآخر كان ينادي سعادته أو ينعي حظه التعيس، فعدت بعدها متجها إلى ركني المنسي  واتكأت على أحد الجدران أجهد نفسي بالتفكير، وبعد برهة من الزمن كأن هاتفا هاتفني: "يجب أن تأخذ السعادة من تلك الفتاتين اللتان رأيتهما في المرة الأولى."</p>
+
+                            <p>ماذا! أأسرق!؟</p>
+
+                            <p>هذا ضد مبادئي وأخلاقي وما هكذا نشأت !!!</p>
+
+                            <p>فضربت بيدي على جبهتي أقول فعلا: لقد وجدتها، كيف لم تخطر على بالي هذه الفكرة من البداية... فما كاد أن يأتي المساء حتى وجدت نفسي بذاك المكان أنتظر السعادة المنشودة، وإن كنت لا أصدق بوجودها، لكن لا ضائر في أن أجرب حتى أقطع اليقين بشبيهه، وبعدها بقليل أدرت برأسي جهة اليمين فإذا بي أرى الفتاتين آتيتين نحوي، أصبت بارتباك شديد، وارتفعت دقات قلبي كأني في مأزق أو في أول موعد غرامي والمحبوبة فينوس. قد نسيت شيئا ما، وهو كيف سأفعل لأسرق هذه السعادة، وهذا ما لم أفكر به من قبل، وبينما أنا غارق في حيرتي لا أدري ماذا أفعل وكأن شيطانا وسوس لي أوحى إلي قائلا :"أن قلدهما" فقلت مع نفسي، هذا أهون من أعود خاوي الوفاض خائب الرجاء.</p>
+
+                            <p>ها هما تقتربان والبسمة مضاءة على محياهما، ماذا سأفعل يا تري...!  بدأت أنظر وأبتسم وأطيل الابتسامة، فلما تجاوزتاني إحداهن التفت خلفها وكنت انا أراقبهما وهما يبعدان عن ناظري، فبدأت اسير خلفهما والابتسامة على وجهي كأنها مرسومة بالصباغة الزيتية لا تتأثر بسرعة بالعوامل الخارجية، وبينما أنا أستمتع بخطواتي وأحتفل ببريق انتصاري شعرت بأنني لا ألاحق الفتاتين من أجل السعادة وإنما من أجل شيء آخر، لست أدري ما هو..  ما هو؟ إحساس غريب ينتابني نحوى احداهن فقط، تلك التي كانت تلتفت خلفها، أحسست كأن أحدا يضع قطعة تلج على قلبي أو شيئا ساخنا، أو .. أو.. ، لست أدري كيف أقول أو أصف، ما يقع خارج حدود اللغة وفوق ما يمكن أن تحمل الكلمات...</p>
+
+                            <p>بلى، بلى... تذكرت، ربما هو ذلك الإحساس الذي يسقط فيه المرء عندما يلتقي بجنس مخالف لجنسه، ولكن ألا يمكن أن يكون ذلك الإحساس هو تلك الشعور الذي يطلق عليه اسم الحب!!! الأعراض التي اعانيها تخبر بذلك، ولكن ما هو الحب؟ هذا مفهوم اشكالي دعنا منه، فكيفما كانت الإجابة فإنها تبقى نسبية للغاية.</p>
+
+                            <p>كان يقول أحد أصدقائي أن الحب هو أن تختلي بفتاة وتتبادل معها القبلات وأن تأخذها بحضنك، ولكني لم أفعل هذا قط، إذن ما هذا الذي أشعر به، ألا يكون الهيام، آه، تذكرت، ربما يكون نوعا من الوهم الذي كنت أبحث عنه قبيل قليل أو ربها هو شيء لا يمكنني ادراكه. الأكثر تعبا من البحث هو المبحوث عنه...</p>
+
+                            <p>أخذت أحدث نفسي قائلا: عد إلى ركنك المنسي وانسى كل شيء، عد كي تواصل حياتك هناك بكل حرية وأنت منسي لا أحد يسأل عنك أو يعكر مزاجك المطرب.</p>
+
+                            <p>وهل أنا كنت أحيا !!!</p>
+
+                            <p>لا، أنت لازلت تحلم أن تعيش</p>
+
+                            <p>أولا تدلني عن حل أسرع لألج لهذه الحياة؟</p>
+
+                            <p>إنك تكاد تلامس بابها ثم تحجم ...</p>
+
+                            <p>أووه، دعني من هذا المنولوج الأجوف الذي لا طائل منه ولا يجدي نفعا.</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Special content for Chapter 4
+            if (chapterNum === 4) {
+                return `
+                    <div class="chapter-image-container">
+                        <img src="book/suad.webp" alt="Suad the girl , the one who is the sought-after thing itself in its other form - Chapter ${chapterNum}">
+                    </div>
+                    <h2>Chapter ${chapterNum}</h2>
+                    <div class="chapter-content">
+                        <p>Indeed, that night I returned and spent the night forgotten in my forgotten corner, searching for a door to open so I could enter a world where life and living were possible.. No sooner had the morning time returned than I felt an overwhelming desire pulling me to try again and meet the girl who seemed to be the sought-after thing itself in its other form, and perhaps my soul leaned towards this idea as flowers lean to the melody of the breeze. After this, I returned and decided to ask her about why my heartbeat rises and my steps become heavy when I see her, and why a strange feeling overtakes me when I think of her? And I continued asking...</p>
+
+                        <p>First of all, who gave you the right to invade my soul, spoil my solitude, and occupy every inch of my geography?</p>
+
+                        <p>She could only open her mouth widely and fix her eyes on me as I spoke until I emptied everything in my quiver and cast all my circular questions. Then she struck me with a question I never expected at all.</p>
+
+                        <p>"Have you too been afflicted with what afflicted me!!!"</p>
+                        <p>"What has afflicted you?"</p>
+                        <p>"I've been afflicted with what you speak of... Since I saw you, my eyelids haven't closed, and sleep hasn't visited my eyes after you. The mind wanders with your strange memory as if you were the destiny chosen for me after a long wait, after a long wait and soul-weariness..."</p>
+                        <p>"And what were you searching for?"</p>
+                        <p>"I was searching for something I thought extinct called love, passion, longing, romance, infatuation, attachment, affection, fondness, devotion, and yearning..."</p>
+                        <p>"Love, wonderful! I too was searching, but not for love"</p>
+                        <p>"What then?"</p>
+                        <p>"I was searching for, for... for something called happiness, but after an exhausting search, I discovered I was like someone chasing a mirage, as happiness is nothing more than an illusion and something from the ancients' tales that my grandmother used to tell me when I was a boy to help me sleep... All endings were happy except the real ones."</p>
+                        <p>"You haven't told me yet; what is love!?"</p>
+                        <p>"Do you really want to know?"</p>
+                        <p>"Yes, I yearn to know everything"</p>
+                        <p>"Love...</p>
+                        <p>It's a duality in nature, for when you love you feel a desire to die and simultaneously a desire to cling to life, a desire to be a comedy hero in a tragic suit. You feel your being and doubt yourself, are you really a being or are you just imagining, are you yourself or just an imagined story, or perhaps you're nothing more than living dreams called daydreams, and it's the nature of these dreams that they're far from achievable, or you hear the echo of those who've departed, you have nothing but memories,... This and something strange of this sort..."</p>
+                        <p>"And why is it that since I've existed on this Earth, I've never felt this before until I met you on my path while I was searching for happiness???"</p>
+                        <p>"Because you haven't seen a girl who could move your feelings by making a good impression on your soul."</p>
+                        <p>"Does this mean you made a good impression on my soul?"</p>
+                        <p>"Yes"</p>
+                        <p>"Who said that?"</p>
+                        <p>"Your state speaks louder than words"</p>
+                        <p>"No, you're just imagining, this is mere coincidence and won't repeat"</p>
+                        <p>"We've talked a lot and you haven't told me your name yet..."</p>
+                        <p>"Ah, uh, I don't know, I forgot, when I remember I'll tell you, and what's your name?"</p>
+                        <p>"Suad..."</p>
+                        <p>"What...! S-S-Suad... Don't tell me you're the happiness I was searching for, because your name in pronunciation is close to what I seek"</p>
+                        <p>"Perhaps, for each person has their own happiness and the paths to happiness are many and diverse..."</p>
+                        <p>"Tell me where you live while you try to remember your name?"</p>
+                        <p>"Farewell, sorry, I don't know anything, I forgot everything in my forgotten corner, ..."</p>
+
+                        <div class="language-divider"></div>
+
+                        <div class="arabic-text" dir="rtl">
+                            <p>فعلا، عدت تلك الليلة وبتت منسيا في ركني المنسي، أبحث عن باب أفتحه كي ألج إلى عالم تكون فيه الحياة والعيش ممكنتين.. فما إن عاد وقت الضحى من جديد حتى شعرت برغبة عارمة تجرني كي أعاود الكرة من جديد وألتقي الفتاة التي تكاد تكون المطوب نفسه في شكله الآخر، وربما نفسي مالت مع هذه الفكرة كما يميل الزهر على نغمات النسيم، عدت بعد هذا وقررت أن أسألها عن سبب ارتفاع نبضات قلبي وثقل خطاي عند رؤيتها، ولماذا ينتابني إحساس غريب عندما أفكر بها؟ واستطردت أسأل...</p>
+
+                            <p>قبل كل شيء، من أعطاك الحق لتقتحم نفسي وتفسدين علي خلوتي وتحتلي كل شبر في جغرافيتي؟</p>
+
+                            <p>فما كان منها إلا أن فغرت فاها وسمرت أعينها في وأنا أتحث حتى أفرغت كل ما في جعبتي وألقيت كل أسئلتي الدائرية، فصفعتني بسؤال لم يكن في الحسبان قط.</p>
+
+                            <p>أأصابك حتى أنت الذي اصابني!!!</p>
+                            <p>- ما الذي أصابك؟</p>
+                            <p>- أصابني الذي تقول... فأنا منذ أن رأيتك لم يغمض لي جفن ولم تقبل جفوني بعدك الوسن، وضل العقل بذكراك مطربا كأني بك القدر الذي لي انتخبَ بعد طول انتظار، بعد طول انتظار وإعياء نفس...</p>
+                            <p>- وعن ماذا كنت تبحثين؟</p>
+                            <p>- كنت أبحث عن شيء ظننته انقرض يدعى الحب والوجد والصبابة والعشق والهيام والتبل والود والولع والهيام والهوى والجوى...</p>
+                            <p>- الحب، يا سلام! وأنا الآخر كنت أبحث، لكن ليس عن الحب</p>
+                            <p>- وعن ماذا إذن؟</p>
+                            <p>- كنت أبحث عن، عن... عن شيء يدعى السعادة، ولكنني بعد بحث مضن اكتشفت أنني كمن يجري وراء سراب، إذ أن السعادة لا تعدو أن تكون ضربا من الوهم وشيء من أساطير الأولين التي كانت تحكي لي عنها جدتي عندما كنت صبيا كي أنام... كل النهايات كانت سعيدة إلا النهايات الواقعية.</p>
+                            <p>- لم تقل لي بعد؛ ما الحب !؟</p>
+                            <p>- أحقا تريد أن تعرف؟</p>
+                            <p>- بلى أنا أطوق لمعرفة كل شيء</p>
+                            <p>- الحب...</p>
+                            <p>هو ازدواجية في الطب، فحين تحب تشعر برغبة في الموت ورغبة في الوقت ذاته بالتشبث بالحياة، ورغبة بأن تكون بطلا كوميديا ببدلة تراجيدية، تشغر بكينونتك وتشك في ذاتك، هل أنت كائن فعلا أم أنك فقط تتوهم، هل أنت أنت أم مجرد قصة متخيلة، أو ربما أنت لا تعدو أن تحيا أحلاما تسمى بأحلام اليقظة، ومن صفة هذه الأحلام أنها تكون بعيدة التحقق، أو تسمع صدى من رحلوا، ليس لك من شيء سوى الذكرى،... هذا وشيء غريب من هذا القبيل ...</p>
+                            <p>- ولماذا أنا منذ أن وجدت على ظهر هذه الأرض لم أشعر بهذا من قبل حتى التقيت بك في سبيلي وأنا أبحث عن السعادة؟؟؟</p>
+                            <p>- لأنك لم تر فتاة استطاعت أن تحرك مشاعرك بوقعها موقعا حسنا في نفسك.</p>
+                            <p>- أهذا يعني أنك وقعت في نفسي موقعا حسنا؟</p>
+                            <p>- بلى</p>
+                            <p>- ومن قال ذلك؟</p>
+                            <p>- حالك يعني عن المقال</p>
+                            <p>- لا، أنت فقط تتوهمين، هذه محض صدفة ولن تتكرر</p>
+                            <p>- تحدثنا كثيرا ولم تقل لي بعد عن اسمك...</p>
+                            <p>- أ آ آ لست أدري نسيت، عندما سأتذكر سأخبرك، وأنت ما اسمك؟</p>
+                            <p>- سعاد...</p>
+                            <p>- كيف...! س س سعاد... لا تقولين لي أنت السعادة التي كنت أبحث عنها، لأن اسمك هذا يقترب بلفظه من ضالتي</p>
+                            <p>- ربما، فكل انسان له سعادته الخاصة ومشارب السعادة متعددة ومتشعبة...</p>
+                            <p>- قلي أين تعيش ريثما تتذكر اسمك؟</p>
+                            <p>- استودعك، عذرا، أنا لا أعرف شيئا نسيت كل شيء في ركني المنسي، ...</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Special content for Chapter 5
+            if (chapterNum === 5) {
+                return `
+                    <div class="chapter-image-container">
+                        <img src="book/The-Injustice.webp" alt="The Injustice - Chapter ${chapterNum}">
+                    </div>
+                    <h2>Chapter ${chapterNum}</h2>
+                    <div class="chapter-content">
+                        <p>I turned my face, heading back to the corner. After just three steps, Suad began calling out, "Hey... hey..." - this was because she didn't know my name. I turned to her, and she said, "If you want to come back, I'll be waiting here." I didn't care about what she said and continued walking, talking to myself, "Happiness is a hero from ancient legends, and love is an illusion, or as the Palestinian poet Mahmoud Darwish says, 'our honest lie...'"</p>
+
+                        <p>Ah... I found it! I'll sit here and imagine that I possess happiness and live it in my imagination until it becomes real. I sat under a tree with thick shade where a gentle breeze blew. I closed my eyes, mounted the steed of my imagination, and began to kiss the eye of happiness. While in this state, a man passed by and was puzzled by my condition. He tried to shake me by my hands, so I turned to him, and he asked, "What are you doing here?"</p>
+
+                        <p>"Nothing, I was just dreaming that I'm happy and that life is possible on this earth, that's all."</p>
+
+                        <p>"What...! Don't you know that the government has issued a decree criminalizing anyone who dreams beyond their social status..."</p>
+
+                        <p>"No, no, sir, I didn't know this! Please forgive my dream..."</p>
+
+                        <p>"Leave this place and don't return to such behavior, or your fate will be execution by hanging, crucifixion, beating with clubs, or we'll feed you to hungry dogs. And if we're merciful, we'll force you to drink poison..."</p>
+
+                        <p>"This or that, here or there, it's all the same - both options are bitter. And who are you, sir?"</p>
+
+                        <p>"You dare question me? I am the government in individual form. Now get out of my sight before I punish you."</p>
+
+                        <p>I hurried back to my forgotten corner without looking behind me, and spent sleepless nights and days. I looked in the mirror to find that the inferno of gray had ignited in my hair, though I used to cry over my youth while my hair was black and my face had luster. I gazed long at myself, at the body inhabiting me, while a question tormented me: "What next?!"</p>
+
+                        <p>Now, for the last time, I'll return to see Suad, not for anything but to take happiness from her, and then I'll never leave my corner again. But before everything, I must find a perfect plan to take the illusion from her lips... Here we meet again. This time, I invited her to visit me in my forgotten corner, and she accepted without hesitation. We set the meeting time for Sunday, when the sun leans toward sunset and the twilight turns red.</p>
+
+                        <p>I waited for her - she never breaks appointments, like the sun. She came wearing an outfit so shiny I could see my reflection in it. I welcomed her while watching for my opportunity to take what I wanted. I offered her a cup of black coffee - there's no milk in my corner - and while we talked, she drew closer bit by bit and smiled. I returned her smile. I fixed my eyes on hers and held her hand, like someone feeling piano keys. I drew near to her, waited with a cat's patience, and then pounced like a lion. I sucked her lip like a thirsty dog licking dirt from severe thirst. I felt nothing, as if I were sucking a piece of something soft. Suad didn't say a word; she was very quiet and seemed to enjoy looking at my face. Now I had achieved my goal and gotten what I wanted...</p>
+
+                        <p>When I finished, I looked at her with a broad smile, and my looks then reflected the ecstasy of victory, as if I were Napoleon standing proud after a crushing victory. She was smiling too, which amazed me - how could I have stolen her happiness while she was still smiling? She seemed even happier than before. So I asked her, "Why are you smiling?"</p>
+
+                        <p>"I feel overwhelming happiness when I'm with you."</p>
+
+                        <p>I was astonished! How could I fail to find happiness for myself yet be the cause of it for another... how strange!</p>
+
+                        <p>I thought then that the illusion of happiness can be replicated but cannot be uprooted. That's it, then. I was very happy about this - now I'm neither a thief nor a rapist, and she too said, as I heard, that she feels happiness with me... I bid her farewell and went out for a little walk through the alleys with a broad smile on my face. On my way, I encountered a policeman while I was smiling - in a state no one would envy - wearing tattered clothes and holed shoes that I wore without socks, with my big toe peeking through one of the holes like a snake had driven from its hole by hunger...</p>
+
+                        <p>The policeman called out in a thunderous voice, "You there, stop!" Without a word, he arrested me while I shouted that I was innocent... innocent... what's my crime? Where are the charges? He sat me in the waiting room while the investigator finished with another criminal, and when my turn came, they took me to the investigator who had such an imposing presence that would make you confess to things you hadn't done. He asked me, "What is your crime?"</p>
+
+                        <p>"I don't know, sir. One of the policemen brought me here without telling me my offense."</p>
+
+                        <p>He called the policeman who had arrested me and asked him about what crime I had committed. He answered, "Sir, I found him smiling and openly committing his crime, violating others' rights in broad daylight."</p>
+
+                        <p>The inspector asked me, "What do you say about the actions attributed to you?"</p>
+
+                        <p>"Yes, I was smiling, but I didn't violate anyone's rights."</p>
+
+                        <p>"Where did you get that smile from?"</p>
+
+                        <p>"A girl I knew from before gave it to me."</p>
+
+                        <p>"You are now condemned for openly committing sin and violating government orders. Your trial will be on Sunday - you'll stay with us for a few days until your trial date."</p>
+
+                        <p>This was my first time entering prison. I spent three days there without eating or sleeping. On the gloomy, ill-fated Sunday morning, I stood before the judge who also asked me, "What is your charge?"</p>
+
+                        <p>"It's detailed perfectly in the investigation report."</p>
+
+                        <p>"What do you say about the charges against you?"</p>
+
+                        <p>"I appeal to your well-known justice. As for the described charge, yes, I smiled in the street, but this isn't my fault."</p>
+
+                        <p>"Whose fault is it then?"</p>
+
+                        <p>"It's the fault of the government that legislates laws secretly from citizens as if setting traps for them, not informing them of any updates to the constitution, like the recent amendment I discovered by chance, where the ruler has the right to govern his people as he wishes - to starve them when he wants, to feed them the leftovers of the dogs that guard him, to cut the tongues of the people when he wants, to seat them on stakes for entertainment. Our rulers love our patient people, patient as donkeys, who never complain, and the more the rulers indulge in entertainment and increase their spices of torture, the people say, 'Forgive us, Lord, long live our just ruler and our wise government, God willing.'"</p>
+
+                        <p>"As our Arab nation's assembly of scholars has decreed that obedience to the ruler takes precedence over obedience to God, and whoever obeys the ruler has obeyed God and the Prophet. Our constitution has clearly stated, requiring no interpretation or explanation, that 'There is no obedience to the Creator in disobedience to the ruler' - so those in authority come first, sir."</p>
+
+                        <p>"Sir, if our Arab rulers heard a child in Gaza cry 'Oh Mu'atasimah!' they wouldn't sleep that night until after praying the Maghrib prayer in Al Quds 'Jerusalem.'"</p>
+
+                        <p>"If I had known, sir, that the government criminalizes public smiling, I would have refrained from this and would have been among the obedient, submissive, repentant, and grateful."</p>
+
+                        <p>With eyes emanating hell and a bristling beard, the judge said angrily, "You are too small to teach the government its job, and we know better what we do. Do you have anything to add before we issue our verdict?"</p>
+
+                        <p>"No, no... but..."</p>
+
+                        <p>"After the confessions that came from the offender's tongue, which the court accepts and considers as one of the causes for its judgment, and with the court's authority to understand and assess the reality, and based on other reasons the court will present in the body of the verdict, the esteemed court has decided to punish the offender..." The judge had barely finished his words and was about to pronounce the sentence when a man shouted loudly inside the courtroom, interrupting the judge... At that moment, I thought to myself that perhaps relief would come through this man.</p>
+
+                        <p>The judge asked, "Do you have something to tell the court's justice?"</p>
+
+                        <p>He answered, "Yes, sir. I found this defendant dreaming that he was riding the steed of happiness near the public garden, so I request that you double his punishment." I answered in myself: "Damn you, curse you, may God silence your tongue."</p>
+
+                        <p>The judge resumed speaking after a moment spent in thought: "The justice of the court has decided to punish the offender with three years of enforced imprisonment with hard labor. End of the session."</p>
+
+                        <div class="language-divider"></div>
+                        
+                        <div class="arabic-text" dir="rtl">
+<p>
+          وليت وجهي قاصدا العودة إلى الركن، وما هي إلا ثلاث خطوات حتى بدأت سعاد تنادي، يا.. يا.. -هذا لأنها لا تعرف اسمي- التفتت إليها فقالت: إن أردت العدوة سأكون بانتظارك هنا، لم أهتم بما قالت وواصلت سيري أحدث نفسي قائلا " السعادة بطلة من أساطير الأولين والحب وهم أو هو كذبتنا الصادقة على رأي الشاعر الفلسطيني محمود درويش..." آآ.. وجدتها سأجلس هنا وأتخيل أنني أمتلك السعادة وأعيشها في خيالي ريثما تصبح حقيقية، جلست تحت شجرة ذات ظل وارف حيث يهب نسيم رقيق، فأغمضت عيني وامتطيت صهوة خيالي وسرت أقبل مقلة السعادة، وأنا على هذا الحال، مر بي رجل فعجب لأمري فحاول أن يحركني بيدي فالتفتت إليه فسألني: ماذا تفعل هنا؟
+        </p>
+        <p>
+          -لا شيء فقط كنت أحلم أنني سعيد وأن الحياة ممكنة على هذه البسيطة، هذا كل شيء.
+        </p>
+        <p>
+          ماذا..! أولا تدري أن الحكومة وضعت مرسوما تجرم فيه كل من يحلم حلما ليس من مستواه ...
+        </p>
+        <p>
+          لا لا، لا يا سيدي أنا لا أعلم هذا! حلمك علي أرجوك...
+        </p>
+        <p>
+          غادر المكان ولا تعود لمثل هذا وإلا سيكون مصيرك الإعدام شنقا أو نصلبك، أو ضربا بالهراوة أو نطعمك الكلاب الجائعة، وإن كنا بك أرحكم نجبرك على شرب السم...
+        </p>
+        <p>
+          هذا وذاك، هنا وهناك سيان، هما أمران أحلاهما مر، ومن حضرتك سيدي؟
+        </p>
+        <p>
+          أتجرؤ على سؤالي، أنا الحكومة في هيئة فرد، هيا أغرب عن وجهي وإلا نكلت بك.
+        </p>
+        <p>
+          هرولت إلى ركني المنسي دون أن ألتفت خلفي وأرقت الليل والنهار، نظرت إلى المرآة فإذا بشعر الرأس أوقدت فيه جحيم الشيب وقد كنت من قبل أبكي على شبابي ولمتي مسودة ولماء وجهي رونق، أطلت الظر متأملا في نفسي في الجسد الذي يسكنني، بينما سؤال يؤرقني "ماذا بعد؟!"
+        </p>
+        <p>
+          الآن، لآخر مرة سأعود كي أرى سعاد، ليس من أجل شيء وإنما لأنزع منها السعادة ولن أبرح ركني بعدها، ولكن قبل كل شيء يجب أن أجد خطة محكمة تمكنني من أخذ الوهم من على شفتيها،... ها نحن نلتقي من جديد، هذه المرة دعوتها لتزورني في ركني المنسي، فقبلت دون أي تردد وحددنا موعد الزيارة، " يوم الأحد عندما تميل الشمس إلى المغيب ويحمر الشفق، انتظرتها، إنها لا تخلف الميعاد مثل الشمس، أتتني بزي كنت أرى فيه وجهي من شدة لمعانه، استقبلتها وأنا أتحين الفرصة كي آخذ المطلوب، قدمت لها فنجانا من القهوة السوداء، -لا حليب في الركن عني- وبينما نحن نتحدث كانت تدنو من شيئا فشيئا وتبتسم، فبذلتها بالمثل، سمرت عليني في عينها ومسكت بيدها، كمن يتحسس مفاتيح البيانو، دنوت منها، تأنت أناة القط وانقضت عليها انقضاض الأسد، أمتص شفتها ككلب ضمآن يلحس التراب من شدة العطش، لم أشعر بشيء كأنني كنت أمتص قطعة شيء ما ناعمة، سعاد لم تنطق بكلمة، كانت هادئة جدا، ويبدو أنها كانت تستعذب النظر في وجهي، الآن ظفرت بالمطلوب ونلت المرغوب،... عندما فرغت نظرت إليها بابتسامة عريضة، وكانت نظراتي حينها تعكس نشوة الانتصار، كما لو كنت نابليون أيقف شامخا بعد انتصار ساحق، وكانت هي الأخرى تبتسم، فعجبت كيف أنني سرقت منها السعادة وهي لازالت تبتسم، حيث نها تبدو أسعد مما كانت عليه، فسألتها: لماذا تبتسمين؟
+        </p>
+        <p>
+          - أشعر بسعادة عارمة تغمرني وأنا معك
+        </p>
+        <p>
+          أخذني العجب! كيف أنني لم أجد السعادة لنفسي وكنت سببا في وجودها للآخر .. واعجبي!
+        </p>
+        <p>
+          فكرت حينها أن وهم السعادة قابل للاستنساخ ولا يقبل الاجتثاث، هذا هو إذن، فرحت بهذا كثيرا، الآن أنا لست بسارق ولا مغتصب وهي الأخرى قالت كما سمعتهم أنها تشعر بسعادة معي،... ودعتها وخرجت كي أتمشى قليلا بين الأزقة والابتسامة العريضة على محياي، فصادفت في طريقي شرطي بينما كنت أبتسم -وحالتي لا أحسد عليها- الثياب رثة، والحذاء مثقوب، كنت أنتعله دون جوارب وكان أصبع قدمي الأكبر يطل من احدى الثقب كأفعى أخرجها الجوع من جحرها... ناداني الشرطي بصوت مجلجل، يا هذا توقف، دونما كلام ألقى علي القبض وأنا أصيح أني بريء... بريء... ما ذنبي أنا، أين التهم؟ أجلسني قاعة الانتظار بينما يفرغ المحقق من أحد المجرمين، وعندما حان دوري، أدخلوني إلى المحقق وكان ذو هيبة تجعلك تعترف بما لم تفعل، سألني: ما هي جريمتك؟
+        </p>
+        <p>
+          لست أدري سيدي لقد ساقني أحد رجال الشرطة إلى هنا دون أعلم ما هو ذنبي.
+        </p>
+        <p>
+          فنادى على الشرطي الذي قام باعتقالي وسأله عن أي جريمة اقترفتها، أجابه: هذا يا سيدي وجدته يبتسم ويجاهر بجريمته معتديا على حق الغير في واضح النهار.
+        </p>
+        <p>
+          سألني المفتش: ماذا تقول في الأفعال المنسوبة إليك؟
+        </p>
+        <p>
+          حقا كنت أبتسم لكنني لم أعتدي على حق أحد
+        </p>
+        <p>
+          ومن أين لك تلك الابتسامة؟
+        </p>
+        <p>
+          منحتني إياها فتاة كنت أعرفها من ذي قبل
+        </p>
+        <p>
+          أنت الآن مدان بمجاهرتك بالمعصية ومخالفة أمر الحكومة، وستكون محاكمتك يوم الأحد، ستقضي معنا بضعة أيام ريثما يحين ميعاد محاكمتك.
+        </p>
+        <p>
+          كانت هذه أول مرة أدخل فيها السجن، قضيت هناك ثلاثة أيام لا آكل فيها ولا أنام، وصبيحة يوم الأحد القاتم المشؤوم، وقفت أمام القاضي فسألتني هو الآخر: ما هي تهمتك؟
+        </p>
+        <p>
+          -إنها مفصلة بإتقان في محضر التحقيق
+        </p>
+        <p>
+          وماذا تقول في التهم المنسوبة إليك؟
+        </p>
+        <p>
+          أرجو من عدالتكم الانصاف المشهود لكم به، أما فيما يخص التهمة الموصوفة فأنا ابتسمت في الشارع، ولكن هذا ليس ذنبي
+        </p>
+        <p>
+          ذنب من إذن؟
+        </p>
+        <p>
+          ذنب الحكومة التي تشرع القوانين خلسة عن المواطنين كأنها تنصب لهم الفخاخ ولا تخبرهم بأي مستجدات تطرأ على الدستور، مثل التعديل الأخير الذي عثرت عليه صدفة، حيث أصبح للحاكم الحق أن يحكم شعبه كيفما شاء، أن يجوعه متى شاء، وأن يطعمه بقايا فتاة الكلاب الذي تحرصه، وأن يقص ألسنة الشعب متى شاء، وأن يجلسهم على الخوازيق وقت التسلية، إن حكامنا تحب شعوبنا الصبورة صبر الحمير، لا تسمع منهم شكوى وكلما أمعنت في التسلية وزادت بهارات الحكام في التنكيل، قالت الشعوب غفرانك ربنا فليحيا حاكمنا العادل ولتحيا حكومتنا الرشيدة بإذن الله.
+        </p>
+        <p>
+          حيث أنه أفتى مجمع علماء أمتنا العربية أن طاعة الحاكم مقدمة على طاعة الله، ومن أطاع الحاكم قد أطاع الله والرسول، وقد بين دستورنا بعبارة واضحة لا تحتاج إلى تأويل أو شرح أنه: "لا طاعة للخالق في معصية الحاكم" فأولو الأمر أولى يا سيدي.
+        </p>
+        <p>
+          إن يا سيدى حكمنا العرب لو صاح طفل في غزة "وا معتصماه" لا ينامون الليلة إلا بعد صلات المغرب بالقدس.
+        </p>
+        <p>
+          ولو كنت يا سيدي أعلم أن الحكومة تجرم الابتسامة علانية لأحجمت عن هذا ولكنت من الطائعين الخاضعين التائبين الممتنين.
+        </p>
+        <p>
+          وبعينين يخرج منها الجحيم وبشعر لحية متأهب قال القاضي في غضب: أنت أصغر ممن يعلم الحكومة عملها، ونحن أعلم بما نفعل، هل لديك ما تضيف قبل أن نصدر حكمنا في حقك؟
+        </p>
+        <p>
+          لا، لا... ولكن...
+        </p>
+        <p>
+          بعد الاعترافات التي جاءت على لسان الجاني والتي تعتد بها المحكمة وتجلها سببا من مسببات حكمها، وبما للمحكمة من سلطة فهم الواقع وتقديره، وعلى ما تراه المحكمة من أسباب أخرى ستعرضها في مثن الحكم، قررت المحكمة الموقرة معاقبة الجاني،.. فما كاد القاضي أن يفرغ من كلامه وينطق بالحكم حتى صاح رجل بصوت عال داخل قاعة المحكمة مقاطعا القاضي، ... حينها قلت في نفسي لعله يكون الفرج على يد هذا الرجل، سأل القاضي: هل لديك ما تخبر به عدالة المحكمة؟
+        </p>
+        <p>
+          أجابه: نعم يا سيدي لقد وجدت هذا المتهم هذا يحلم أنه يمتطي صهوة السعادة قرب الحديقة العمومية فأرجو أن تضاعف له العقاب -أجبته في نفسي: تبا لك، واللعنة عليك، أخرس الله لسانك- واستأنف القاضي الكلام بعد هنيهة قضاها في التفكير: قررت عدالة المحكمة معاقبة الجاني ثلاث سنوات سجنا نافذة مع الأعمال الشاقة، رفعة الجلسة.
+        </p> <p>قررت عدالة المحكمة معاقبة الجاني ثلاث سنوات حبسا نافذة مع الأعمال الشاقة، رفعة الجلسة.</p>
+                        
+                            </div>
+                    </div>
+                `;
+            }
+            
+            // Special content for Chapter 6
+            if (chapterNum === 6) {
+                return `
+                    <div class="chapter-image-container">
+                        <img src="book/prison.webp" alt="Prison - Chapter ${chapterNum}">
+                    </div>
+                    <h2>Chapter ${chapterNum}</h2>
+                    <div class="chapter-content">
+                        <p>I entered prison for the first time. Its appearance was terrifying and desolate, with no furniture or bedding except for a piece of worn cloth so dust-laden it had become like wood. Four walls with cracks growing from all sides, and spiders had built homes in every corner. Rats roamed freely, having grown accustomed to the prisoners as the prisoners had to them. The room they put me in was very small, with two prisoners who stared at me with questions etched on their faces. I stood frozen between them, looking at the place and studying them, their clothes tattered with holes...</p>
+
+                        <p>I found myself a corner and sat crouching, burying my face in my lap. I remained in this state for about a month and a half until one of the prisoners came to me and said, "You shouldn't stay like this whether your time here will be long or short. We are your family here."</p>
+
+                        <p>I raised my eyes to him and studied his face. He told me his name was Salem. We began talking, and I asked him about the reason for his detention. "My story is long, but it makes for a good tale to kill time. I've told it to all the prisoners who've passed through here," he continued:</p>
+
+                        <p>"Before entering this prison, I deeply loved a woman who belonged to the bourgeois class, while I was just a simple fruit seller. I would watch her pass by without daring to speak to her. But over time, I couldn't keep this love hidden. One day, I skipped work to meet her. I waved to her from afar as she walked with her graceful steps in her pink dress, her hair flowing down her back, her attractive figure, and her large black eyes, which made me fall even more deeply in love. When she saw me waving, she stopped, and I rushed to her. Without any introduction, I told her I hadn't slept well since my eyes first met hers. She showed neither acceptance nor rejection, and I kept holding onto hope for another meeting.</p>
+
+                        <p>I watched her one day and learned where she lived. I began hovering around her house occasionally, hoping to catch a glimpse of her. She was gentle and kind, but her father was harsh and arrogant. One day, he saw me near the house waving to her as she looked out from the window. Before I knew it, my hands were bound behind my back. Her father was a government official. I was imprisoned without any right to defend myself, without even a mock trial. To this day, I don't know my sentence length or the charge against me, and I've been here for so long..."</p>
+
+                        <p>He sighed deeply.</p>
+
+                        <p>"Now, after serving a full year in prison, with no visitors or anyone asking about me, I was forgotten in my corner. When I entered this hell that clipped my wings, I became even more forgotten. However, Suad left no place unsearched looking for me, but unfortunately, she didn't even know my name to ask about me. That was my mistake – I never told her my name. She would occasionally come to the corner where I used to stay, hoping to see me, but sadly to no avail... Her efforts yielded nothing.</p>
+
+                        <p>I left prison after serving my time to find everything had changed, as if I'd come from a bygone era... I walked through the streets; the houses I knew had changed their colours and shapes. New buildings had sprung up, and skyscrapers I'd never seen before. People's clothes had changed too. What were these signs hung here and there? What were these pictures? Only one large billboard caught my attention – it showed a girl wearing nothing but a bra and very short triangle-shaped shorts, with 'Major Discounts' written in front. I wondered to myself if this was a place selling women or selling underwear. I had never known such things before... I continued walking, looking left and right, remembering Suad and my forgotten corner. Here I am, being born again..."</p>
+
+                        <div class="language-divider"></div>
+                        
+                        <div class="arabic-text" dir="rtl">
+                            <p>دخلت السجن لأول مرة، منظره مهول وموحش لا أثاث فيه ولا فراش سوى قع من القماش البالي الذي تغلغلت فيه الغبار حتى أصبح كقطعة خشب، أربع حيطان، نَمَت فيها الشقوق من كل جانب، والعنكبوت لم يدع ركنا إلا وبنى فيه بيتا، الفئران تسرح وتمرح داخلة، لقد اعتادت عليها السجناء فلم تعد تخشاهم والسجناء كذلك، وكانت الغرفة التي أدخلوني إليها صغيرة جدا، بها سجينين أخذا يحدقان في وعلامات الاستفهام تنغرس في رأسيهما، وأنا مسمر بينهما أطالع المكان وأطالعهما، ثيابهم مهلهلة بالثقوب...</p>
+
+                            <p>التمست لنفسي ركنا وجلست القرفصاء، دسست وجهي في حجري، ولبثت على هذا الحال ما يقارب شهرا ونصف، حتى جاء أحد السجناء وقال لي: لا يجب عليك البقاء على هذا الحال سواء كانت المدة التي ستقضيها هنا ستطول أم ستقصر، نحن هنا أهلك.</p>
+
+                            <p>رفعت بصري إليه وأخذت أتأمل وجهه، أخبرني أن اسمه سالم، أخذنا نتحدث فيما بيننا، فسألته عن سبب اعتقاله، قصتي طويلة، ولكن تصلح حكاية لقتل الوقت، لقد قصصتها على كل السجناء الذين مروا من هنا .. ثم استطرد قائلا:</p>
+
+                            <p>قبل ولوجي لهذا السحن أحببت امرأة حبا جما، وكانت هذه المرأة تنتمي إلى طبقة برجوازية، وأنا لم أكن سوى بائع بسيط للفواكه، كنت أنظر إليها وهي تمر من أمامي دون أن أجرؤ على الحديث معها أو أكلمها، ولكنني مع مرور الوقت لم أستطيع لهذا الحب كتمانا، وذات يوم تخلفت عن العمل لألتقي بها، لوحت لها بيدي من بعيد وهي تسير بخطواتها الرشيقة وفستانها الوردي وشعرها المنساب على ظهرها وقدها الجذاب، وعينيها السودوتين الكبيرتين، فزدت حينذاك بها هياما، فلما رأتني ألوح لها بيدي توقفت وأسرعت إليها، ودون أية مقدمات قلت لها أنني لم أنعم بنوم منذ أن أبصرت عيني عيناها، فلم تبدي حينها لا قبول ولا رفض، وضللت أحتفظ بالأمل على أمل اللقاء، راقبتها ذات يوم فعرفت أين تقطن، وبدأت أحوم حول منزلها من حين لآخر لعلي أنعم برؤيتها، كانت وديعة سمحاء ولكن أباها كان من الغلاظ المتعجرفين الجفاء، رآني ذات يوم بجوار المنزل وأنا ألوح لها بيدي حيث كانت تطل علي من الشباك، فلم أشعر بنفسي حتى وجدت يدي مغلولة ورائي، كان أباها من أحد رجال الدولة، لقد أْدْخلت السجن دون أن أعطى حق الدفاع عن النفس ودون أي محاكمة حتى ولو كانت صورية، وأنا إلى حد الآن لم أعرف المدة المحكوم بها ولا التهمة المدان بها وقد مضى علي من الوقت هنا الكثير الكثير ...</p>
+
+                            <p>تنهدت طويلا</p>
+
+                            <p>الآن وقد مضى من المدة المحكوم علي بقضائها في السجن سنة كاملة، دون زائر يأتي أو سائل يسأل عني، كنت منسيا في ركني ولما دخلت هذا الجحيم الذي قص جناحي ازدت نسيانا، إلا أن سعاد لم تترك مكان إلا وطرقته بحثا عني، لكنها ولسود الحظ لم تكن تعلم حتى اسمي كي تسأل عني، كان هذا خطئي لم أخبرها عن اسمي، كانت من حين لآخر تأتي للركن الذي كنت آوي إليه من قبل لعلها تراني، ولكن للأسف الشديد دون جدوى... لم تسفر جهودها عن شيء.</p>
+
+                            <p>خرجت من السجن بعد انقضاء المدة، فوجدت الأحوال تغيرت كأنني الآن جئت من الزمن الغابر ... أخذت أتمشى بين الدروب، الديار التي عهدتها تغيرت الوانها وأشكالها، بنايات أخرى ولدت وناطحات سحاب لم أكن قد رأيتها فيما سلف، الثياب التي يلبسونها الناس هي الأخرى تغيرت، وما هذه اللفتات التي علقت هنا وهناك!، وما هذه الصور، فلم تثرني إلا لافتة كبيرة تحمل صورة فتاة لا ترتدي من اللباس سوى صدرية والشرط القصير جدا على شكل مثلث، ومكتوب أمامها تخفيضات جد مهمة، تساءلت مع نفسي هل هذا محل لبيع النساء، أم بيع الملابس الداخلية، أنا لم أعهد مثل هذا من قبل ... تابعت مسيري أتجول وأرمي ببصري يمنة ويسرى، تذكرت سعاد وتذكرت ركني المنسي، ها أنا الآن أولد من جديد...</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Special content for Chapter 7
+            if (chapterNum === 7) {
+                return `
+                    <div class="chapter-image-container">
+                        <img src="book/leaving the town.webp" alt="Leaving the Town - Chapter ${chapterNum}">
+                    </div>
+                    <h2>Chapter ${chapterNum}</h2>
+                    <div class="chapter-content">
+                        <p>I returned to my corner only to find it colonized by owls, rats, spiders, and an army of cockroaches. So I abandoned it, forgetting it was once my sanctuary. I began sleeping wherever night found me. I no longer had any connection to this forgotten homeland after losing my forgotten corner.</p>
+
+                        <p>I withered greatly in prison. Even bitter colocynth tastes sweeter than humiliation and degradation. When freedom is stolen from a person, death becomes preferable... I had my wishes, and fate had its own, but fate only wished for me to leave this land and exchange it for another. As usual, I took my bag, which contained nothing but a single suit and some hole-ridden socks, my toes peeking through like hungry snakes emerging from their burrows...</p>
+
+                        <p>I left, bidding farewell to my first homeland. For the first time, I would say goodbye without tears or regret—in fact, I left happy and delighted. I reached the port and stood there, unsure where to begin. Before me lay the sea I would sail, its waves disgusted, gray in color, ebbing and flowing, greatly disturbed. Boats danced atop the waves, their colors fading... I forgot to mention that the sea draws its color from the sky. I now stand on the threshold between heaven and hell, though I know not which direction leads to which. I hesitated briefly, looking forward, hoping to see something new, looking back feeling as though I'd forgotten something there. I remained in this state for long, between advancing and retreating, between moving forward and holding back. Finally, after settling on departure, I signaled to one of the boats. The boatman came and asked, "Where do you want to go?"</p>
+
+                        <p>"Wherever fate wishes."</p>
+
+                        <p>I asked him what lay beyond these seas.</p>
+
+                        <p>"Paths and people and stories and kingdoms and vagabonds and valleys and mountains and trees. There's war and stabbing and fighting, there's peace and love and happiness... there's death and life, and more, and more, and more..."</p>
+
+                        <p>I marveled at him and believed him, though I doubted him only when he spoke of happiness...</p>
+
+                        <p>"Have you ever seen it?"</p>
+                        <p>"Who?"</p>
+                        <p>"Happiness?"</p>
+                        <p>"No, but I hear about it..."</p>
+                        <p>"Then take me there."</p>
+
+                        <p>Just as I was about to board the boat, I heard someone calling from behind...</p>
+
+                        <p>"Hey... hey... hey..." It was Suad. I gazed at her for a long time without uttering a word. She had grown even more beautiful than before. The colors of her clothes were utterly different, stirring in me feelings I couldn't explain or describe. They weren't red or green or any color we know. Her night-black hair danced with the breeze. I spoke to myself..., the winds always blow contrary to what ships desire...</p>
+
+                        <p>After this intense contemplation, she came to me, embraced me, and kissed me passionately. I didn't reciprocate, not because I was unfeeling, but because I refused to give hope I didn't possess. She asked about my long absence, so I told her about the incident. It seemed to pain her deeply, as two tears sparkled from her eyes, reflecting sunlight onto my face. I tried to play the role of the tender one, gently wiping the tears from her lashes. Her cheeks were soft—I wanted to kiss her but feared returning to prison. In some laws, a kiss can become one's shroud, can cause strife between two tribes, two nations, or even two hearts.</p>
+
+                        <p>She held my hand and told me about the difficult days she spent in my absence. She said, "I remained faithful to you while you were gone and didn't allow myself or any man to invade my being. While you were far from me, I comforted myself with hopes of a beautiful reunion."</p>
+
+                        <p>I told her, "It's all the same to me whether you were faithful or not. You shouldn't have clung to illusion. Often, hope becomes the grave of dreams and their dreamer's shroud. Like a book in the wind that never settles, tossed about however and wherever the winds desire. In life's game, one might play seriously and lose everything, or play carelessly and win everything, or vice versa..."</p>
+
+                        <p>"But in both cases, it ends in one way—loss and dissolution... And before I leave, take from me this wisdom, though I know not if it's right or wrong: Life is a circle, circular in shape. When a person is born into it, they're born at a certain point upon it. Wherever they turn their face, whether right or left, they haven't erred... They spend their life walking, but never reach the point from which they started. So don't say 'I didn't do this' or 'I did that,' because the matter remains the same either way... Do what your conscience dictates. There is no such thing as right or wrong—as I told you, it all has one ending..."</p>
+
+                        <div class="language-divider"></div>
+                        
+                        <div class="arabic-text" dir="rtl">
+                            <p>عدت الى ركني الذي وجدته استعمر من طرف البوم والفئران والعنكبوت، وجيش من الصراصير، فغادرته ونسيت أنه كان لي فيما مضى ركنا أوي إليه، وصرت أنام حيثما أدركني الليل، لم تعد لي صلة تربطني بهذا الوطن المنسي، لما فقدت ركني المنسي.</p>
+
+                            <p>ذُبت كثرا في السجن، العلقم أحلى أمام الذل والهوان، إذا سلبت الحرية من المرء فلأفضل له أن يقضي نحبه... أنا أشاء والأقدار تشاء ولم تشاء الأقدار إلا أن أغادر البلاد وأستبدل بلادا غير البلاد، وكما العادة أخذت حقيبتي التي لم أكن أحمل فيها سوى بدلة واحدة وبعض الجوارب المثقوبة، تطل منها اصابع قدمي كأنها أفاعي طلت من جحورها أخرجها الجوع....</p>
+
+                            <p>خرجت مودعا موطني الأول، ولأول مرة سأودع من غير دمع ولا ندم، بل حتى أني خرجت فرحا مسورا، وصلت الميناء ووقفت لست أدري من أين سأبدأ، ها هو البحر الذي سأركبه أمامي، أمواجه مشمئزة ذات لون رمادي، تقبل وتدبر، مضطربة كثيرا، القوارب تتراقص فوق الموج وقد بدأت ألوانها تتلاشي... نسيت أن أقول أن البحر يستمد لونه من السماء، أنا الآن فوق البرزخ بين الجنة والنار ولكن لست أدري في أية جهة الجنة، وفي أي جهة النار، ترددت قليلا، أنظر إلى الأمام وأتطلع لكي أري شيئا جديدا، التفت ورائي وأحسست كأني قد نسيت هناك شيئا ما، لبثت على هذا الحال كثرا بين إقبال وإدبار بين تقدم وإحجام، وأخيرا أشرت إلى أحد القوارب بعدما استقر رأي على الرحيل، فجاء إلى وسألني إلى أين تريد؟</p>
+
+                            <p>- الى حيث أرادت الأقدار</p>
+
+                            <p>سألته ما الذي يوجد وراء هذه البحار ..؟</p>
+
+                            <p>- سبل وأناس وأمسار وممالك وصعاليك ووديان وجبال وأشجار، هناك الحرب والطعن والضرب، هناك السلم والحرب والسعادة والحب .. هناك الموت والحياة وهناك، وهناك، وهناك،...</p>
+
+                            <p>فعجبت له وصدقته، وكذبته لكن فقط عندما تحدث عن السعادة، ...</p>
+
+                            <p>هل رأيتها يوما ؟</p>
+                            <p>- من هي؟</p>
+                            <p>السعادة ..؟</p>
+                            <p>- لا ولكنني أسمع عنها ...</p>
+                            <p>إذن خذني هناك.</p>
+
+                            <p>فما إن أردت أن أركب القارب حتى سمعت كأن أحدا ينادي من خلفي</p>
+
+                            <p>.. يا... يا ... يا .... لقد كانت سعاد نظرت إليها طويلا دون أن أتلفظ ولو بكلمة، لقد ازدادت جمالا أكثر مما كانت عليه، الوان ثيابها مختلفة جدا، إنها تبعث في نفسي شعورا لم أجد له تفسرا، وليس هناك وصف يمكنني أن أصفه به، لا هي ذات لون أحمر أو أخضر أو لون من الألوان التي نعرف، شعرها الليلي يطرب مع النسيم، أتحدث مع نفسي ... ، الرياح دائما تجري بما لا تشتهي السفن..</p>
+
+                            <p>بعد هذا الإمعان الشديد جاءت إلي وضمتي اليها وقبلتي بحرارة دون أن أبادلها أنا شيء من هذا لا لأنني عديم الإحساس ولكن كلى لا أعطي من الأمل ما لا أملك، سألتني عن غيابي الطويل، فقصصت عليها الحادث، يبدو أنه كان مؤلما جدا بالنسبة إليها، لأن دمعتان أشرقتا من مقلتيها تعكسان ضوء الشمس في وجهي، حاولت أن أتقمص شخصية الحنون فمسحت الدمع من على جفولها على هون شديد، وجنتيها ناعمتن أردت أن أقبلها ولكنني خشيت على نفسي الدخول إلى السجن مرة أخرى، ففقي بعض الشرائع القبلة قد تكون كفنا لصاحبها، وقد تكون سببنا لتفريق قبيلتين أو دولتين أو حتى بين قلبين.</p>
+
+                            <p>كانت تمسك بيدي وتحدثني عن الأيام العصيبة التي قضتها في بعدي، أخبرتني قائلة " إنني ضللت وفية لك في غيابك ولم أسمح لنفسي أو لرجل أن يقتحم ذاتي، إذ كنت وأنت بعيد عني أمني نفسي وأعللها بلقاء جميل"</p>
+
+                            <p>فقلت لها سيان عندي أغدرت أم وفيت، كان عليك أن لا تتشبثي بالوهم، ففي كثير من الأحيان كان الأمل قبر الأحلام وكفن صاحبة، كتاب في وجه الريح لا يستقر على حال تقلبه الرياح أنى شاءت وكيفما تشاء، والإنسان في لعبة الحياة قد يعلب بجد فيخسر كل شيء وقد يلعب بهزل ولا مبالات ويكسب كل شيء والعكس...</p>
+
+                            <p>ولكنه في كلتا الحالتين ينتهي إلى نهاية واحدة وهي الخسران والضياع... وقبل أن أرحل خذي مني هذه الحكمة التي لست أدري أصحيحة هي أم خاطئة، الحياة هي دائرة، أي ذات شكل دائري، عندما يولد المرء فيها يولد على نقطة معينة فوقها، وحيثما وجه وجهه سواء يمينا أو شمالا لا يكون قد أخطأ... ويمضي حياته يسير، ولكنه لا يصل يوما الى النقطة التي انطلق منها فلهذا لا تقولي أنني لم أفعل كذا وفعلت كذا، لأن الأمر في كلتا الحلتين يبقي واحد، ... افعلي ما يمليه عليك ضميرك، ليس هناك شيء اسمه صواب ولا شيء اسمه خطأ، الأمر كما قلت لك له نهاية واحدة ...</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Special content for Chapter 8
+            if (chapterNum === 8) {
+                return `
+                    <div class="chapter-image-container">
+                        <img src="book/goodbye.webp" alt="Goodbye - Chapter ${chapterNum}">
+                    </div>
+                    <h2>Chapter ${chapterNum}</h2>
+                    <div class="chapter-content">
+                        <p>When I decided to leave, she clung to my hand, refusing to let go. She pleaded intensely for me to stay, but my desire to leave was too strong to be defeated. I boarded the boat and set sail, leaving her on the seashore waving until I disappeared from sight. When I reached land, the boatman pointed me toward the path, and I walked on to face what remained of life in pursuit of the unknown.</p>
+
+                        <p>I entered a village and, as was my habit, sought a place where I could observe life's light and contemplate the fate I might face. Dawn approached as night retreated, and I remained motionless in my spot. I spent days in this state, dining on cactus and berries that sprouted from the earth, sometimes on tree leaves when necessity called, and other times I simply fasted. Until one day, a man passed by while I sat near a well I frequented when thirsty. He greeted me, and I returned his greeting. I asked his permission to question him, which he granted.</p>
+
+                        <p>"Is happiness considered a crime in your land? Could you show me how to attain happiness?"</p>
+
+                        <p>"The greatest happiness lies in the Sultan's palace."</p>
+
+                        <p>"The Sultan's palace?!"</p>
+
+                        <p>"Yes... Go there and seek work. Perhaps that will be your way out and a means to achieve your goal."</p>
+
+                        <p>I bid the man farewell after he directed me to the palace. I hurried there, overjoyed, as if happiness were calling me from afar. When I reached the gate, I told the guard I wished to meet the king. He asked my purpose, but I didn't want to reveal my inner thoughts, so I simply said I wanted to speak with him. He told me I was out of luck—the king had gone hunting. I replied, "I know that—luck doesn't come to just anyone. But when will he return?"</p>
+
+                        <p>"Two or three days, and he'll be back..."</p>
+
+                        <p>I had no choice but to wait, even if it meant waiting a month or a year. I returned after two days but didn't find him until the third day. They permitted me to enter his presence, and I greeted him with the kings' salutation: "May curse be averted, O King." I told him of my need and the hope behind my visit. He said, "Your request is granted, and your need shall be fulfilled." He asked if I knew the art of cooking, and I answered yes... So he placed me with the maidens to prepare meals and dishes. I forgot to mention that before all this, before things came to be as they were, I had worked for Ba Al-Arabi in his popular restaurant, which his father had run before him.</p>
+
+                        <p>I stayed with King Shah, constantly among the maidens. Sometimes I found their conversation sweet, especially Nard, who reminded me of Suad with her flowing hair and captivating presence. She made me laugh when she spoke of her seemingly impossible dreams. The poor girl said she hadn't known herself until she found herself a captive in the king's palace, singing for him... When I learned she could sing, I asked her to sing for me and delight me with her melodies. She sang a piece from Al-Mutanabbi's poem that begins:</p>
+
+                        <p>"How to find solace with no family, no homeland,<br>
+                        No companion, no cup, no dwelling place?"</p>
+
+                        <p>I couldn't hold back my tears at these words, which struck my ears like arrows to the heart... Her sorrowful voice could make even those whose eyes had run dry of tears weep... She revived wounds I had buried in the past and tried to forget.</p>
+
+                        <p>I spent what I might call a lifetime there, if not for the nagging thought of the happiness I sought. I searched extensively, like looking for a needle at the bottom of the ocean—how could I ever find it? Days passed, and Nard and I would seek each other's comfort when life's burden grew heavy and sorrow took its toll, hoping to ease our souls.</p>
+
+                        <p>When the first year passed and I had become one of the palace people, King Shah had a daughter—I won't say she was beautiful, but she remained the princess, the king's daughter. She became attracted to me by chance, though I had never thought of her or entertained such an idea before. She began visiting us in the kitchen daily; I didn't know she came for me, but in recent days, her attention toward me increased until I couldn't rest until I asked Nard.</p>
+
+                        <p>"Nard... don't you think Princess Hind has begun treating me with unusual kindness?"</p>
+
+                        <p>"Are you truly dim-witted or just pretending?"</p>
+
+                        <p>"How? What do you mean?"</p>
+
+                        <p>"She's been infatuated with you for ages, but you're like a dead man, unaware of what happens around you. Don't you remember the day she came to us and sang the poet's words: 'Has love struck you, or were you hit by arrows? These are but the traits of one in love,' and your favorite poet's words: 'How many nights I stayed awake in delight, longing for one who sleeps through them...'"</p>
+
+                        <p>"Yes, I remember well..."</p>
+
+                        <p>"Since then, she's been burning with a cold fire."</p>
+
+                        <p>I looked at Nard with thoughtful, regretful glances. When she saw my look, she said, "Don't look at me like that. If you wish to marry her, do so. Don't be surprised—even if you're not of royal lineage or your father lacks influence and reputation, you can marry her because she loves you, and her father, the king, refuses her nothing. Don't think too much. Charm her with your words, for if you marry her, you'll become one who gives orders rather than receives them..."</p>
+
+                        <p>I thought to myself, why not try? If I like it, well and good; if not, I can return whence I came. I followed Nard's advice and began reciting to her from Majnun's poetry I had memorized. Each day, her attachment and passion for me grew stronger. One evening, we went to the palace garden, filled with flowers and roses beyond what eyes had seen or ears had heard. Birds sang melodies around us, and the palace fountain added to the atmosphere's gentleness. She rested her head on my chest to drink from my tenderness, which I had never known before, though I was skilled at playing the role of the tender one, as I had done with Suad at the port.</p>
+
+                        <p>But things didn't remain this way. A guard saw us and rushed to tell the king that I was kissing the princess in the garden. When King Shah heard this news, his hair stood on end with rage, and he ordered his soldiers: "Bring him to me immediately!" Before I knew it, soldiers seized me, one on the right and one on the left, and dragged me to the king. As soon as he saw me, he shouted in my face, "Is this how you repay kindness? Take him... put him in prison and chain his feet!" He didn't even grant me the right to defend myself. They placed me in a cell in chains, and I remained there for three days with no news of death to free me from my situation, nor any visit from Hind to explain what was happening.</p>
+
+                        <p>On the fourth day, the maiden Nard managed to trick the guard with her sweet words, clouding his thinking with a broad smile. He opened the door for her, disobeying the king's order to obey Nard's wish. She told me the king was still angry, but Hind had managed to soften his heart, and I needed only to be patient a little longer... That fourth evening, I was released, and Hind herself came to free me. She asked me to request her hand from her father, but I asked her to wait a while until things returned to normal...</p>
+
+                        <p>I continued in this state until I began to forget the happiness I had come seeking. I turned over my thoughts and reconsidered my position. What should I do? Should I marry her? I'll marry her to become a person of authority, one of those who make decisions. On one of February's dark nights, with winter, lightning, and thunder roaring, King Shah sat alone with himself. I came to him and said, "My lord, would you permit me to speak with you about an important matter?"</p>
+
+                        <p>He raised his eyes to me and said, "Go ahead, say what you have to say."</p>
+                        
+                        <p>"I want to marry your daughter Hind," I said it just like that, with complete fluency and without introduction or preamble...</p>
+
+                        <p>I had barely finished speaking when he shouted at me in rage, sparks of anger flying from his mouth, "Who are you to marry my daughter? Have you forgotten you're just one of my workers? How dare you speak such words? Get out of my sight! Don't let me see you again, or I'll punish you and have your head!" He called to the guards and ordered them to remove me from the palace... The guards dragged me like a sheep being led to market...</p>
+
+                        <div class="language-divider"></div>
+                        
+                        <div class="arabic-text" dir="rtl">
+                            <p>ولما أردت الرحيل تمسكت بيدي ولم تشاء أن تتركني ألحت علي كثيرا من أجل البقاء، ولكن رغبتي في الرحيل كانت أشد وأقوى من أن تهزم، ركبت القارب وانطلقت وتركتها على ضفة البحر تلوح لي بيدها حتى تواريت عنها، ولما وصلت اليابسة ودلني صاحب القارب على الطريق سرت أواجه ما تبقى من الحياة في الجري وراء المجهول</p>
+
+                            <p>دخلت قرية وكعادتي التمست لنفسي مكان أرقب فيه ضوء الحياة وأخمن المصير الذي يمكن أن أواجه، ها هو الصبح قد أقبل والليل قد أدبر، وأنا لازلت في مكاني جامدا لا أتحرك، قضيت أياما على هذه الحال كنت أتغدى على الصبار والتوت مما تنبث الأرض، وأحيانا أوارق الأشجار عندما تستدعي الضرورة، وفي أحيان أخرى كنت أظل على الطوى، حتى مربي رجل وأنا جالس قرب بئر كنت أتي إليه عندما أشعر بالظمأ، فألقى علي السلام فرددت عليه السلام واستأذنته لأسأله فسمح لي بذلك</p>
+
+                            <p>فسألته هل السعادة عندكم تعتبر جرما؟ هل لك أن تذلني على طريقة أحصل بها على السعادة؟</p>
+
+                            <p>- السعادة الكبير في قصر السلطان</p>
+
+                            <p>قصر السلطان!!!</p>
+
+                            <p>نعم... اذهب إليه والتمس منه عملا لعل ذلك يكون لك مخرجا ووسيلة لتحقيق مبتغاك</p>
+
+                            <p>ودعت الرجل بعدما أدلني على القصر وسرت إليه أهرول من شدة فرحتي وكأن السعادة تناديني من بعيد، حتى وصلت إلى بابه وأخبرت حارسا كان عند الباب بأنني أريد أن ألتقي بالملك، فسألني ما حاجتك به، فلم أشاء أن أفصح له عن سريرتي، فأجبته أن لا شيء فقط أريد أن أتحدث إليه، فقال لي لا حظ لك الملك خرج إلى الصيد، فأجبته أعلم ذلك فالحظ لا يتأتى لأي كان، ولكن متى سيعود ؟</p>
+
+                            <p>يومان أو ثلاث ويرجع...</p>
+
+                            <p>لم يكن بوسعي حينذاك إلا الانتظار وإن كان سيعود من بعد شهر أو سنة، فعدت بعد يومان فلم أجده حتى اليوم الثالث، فأذنوا لي بالدخول عليه وحييته بتحية الملوك "أبيت اللعنة أيها المك" فأخبرته بحاجتي وما أرجوه من زيارتي له فقال: طلبك مجاب وحاجتك مقضية، فسألني إن كنت أحسن فن الطبخ فأجبته أن نعم ... فجعلني مع الجواري أعد الوجبات والأطباق، نسيت أن أقول أنه قبل كل ما سبق وقبل أن تؤول الأمور إلى ماهي عليه أنني كنت أعمل عند با العربي في مطعمه الشعبي الذي كان يعمل فيه أباه قبل أن تصير مقاليد الأمور إليه</p>
+
+                            <p>ولبثت عند الملك شاه لا أفارق الجواري، أحيانا كنت أستعذب حديثهن، نرد الجارية التي كانت تذكرني بسعاد بشعرها المنساب وقدما الجذاب، كانت تضحكني عنما كانت تحدثني عن أحلامها البعيد التحقق، تقول المسكينة أنها لم تشعر بنفسها حتى وجدت نفسها سبية في القصر عند الملك شاه تغني له... ولما علمت أنها تجيد الغناء طلبت منها أن تغني لي وتطربني بأنغامها، فغنت لي قطعة من قصيدة للمتنبي التي مطلها:</p>
+
+                            <p>بما التعلل لا أهل ولا وطن ولا نديم ولا كأس ولا سكن</p>
+
+                            <p>فلم أستطيع أن أحبس دمعي أمام هذه الكلمات التي كان وقعها على مسمعي كوقع النبال على الفؤاد..... وصوتها الشجي الذي يبكي من نضبت عيناه من الدموع... فأحيت جروحا كانت دفينة الماضي، كنت أحاول أن أتنساها</p>
+
+                            <p>قضيت هناك وقتا أكاد أن أصفه بأنه حياة، لولا أن فكرة السعادة التي أبحث عنها تؤرقني، فتشت كثيرا، كأنني كنت أبحث عن ابرة في قعر المحيط فأنى لي أن أجدها، ومضت الأيام وأنا ونرد حين تشتد على أحدنا وطأة الحياة وينكل به الأسى يلجا إلى صاحبه شاكيا، لعله يروح على نفسه</p>
+
+                            <p>ولما مضى العام الأول، وأصبحت واحدا من أهل القصر، كانت للمك شاه فتاة لا أقول حسناء ولكنها تبقى الأميرة بنت الملك، علقتني عرضا ولكنني لم أفكر فيها قط ولم تخطر لي فكرة كهذه من قبل، وبدأت كل يوم تأتي إلينا في المطبخ لم أكن أعلم أنها تأتي من أجلي، ولكن في الأيام الأخيرة بدأت تزيد من اهتمامها بي فلم يهنأ لي بال حتى سألت نرد</p>
+
+                            <p>نرد... ألا ترين أن الأميرة هند بدأت تعاملني بشكل فيه نوع من اللطف ؟</p>
+
+                            <p>أبليد أنت حقا أم تتبالد؟</p>
+
+                            <p>كيف، ماذا تقصدين ؟</p>
+
+                            <p>إنها هائمة بك منذ زمن ولكنك أنت والميت على حد سواء، لا تدري ماذا يقع من حولك، ألم تذكر اليوم الذي جاءت إلينا فيه وغنت أمامك قول الشاعر: (أصابك عشق أم رميت بأسهم فها هذه إلا سجية مغرم ) وقول شاعرك المفضل: (كم ليلة سهدتها من طرب شوقا إلى من يبيت يرقدها... )</p>
+
+                            <p>بلى أذكر جيدا ...</p>
+
+                            <p>فمنذ ذلك الحين وهي على هذا الحال تكتوى بنار باردة</p>
+
+                            <p>فنظرت إلى نرد نظرات تفكر وأسف، فلما رأتني أنظر إليها بتلك النظرة قالت: لا تنظر إلي هكذا إن شئت أن تتزوجها ففعل، لا تتعجب وإن لم تكن من سلالة الملوك أو أبوك له قول وسمعة يمكنك الزواج منها لأنها تحبك وأبوها الملك لا يرفض لها طلبا لا تفكر كثيرا، لاطفها بكلامك فإنك إن تزوجت بها ستصبح من الذين يصدرون الأوامر لا ممن يتلقونها....</p>
+
+                            <p>فقلت مع نفسي لما لا أجرب إن أعجبني الحال فذاك وإذا لم، أطقها وأعود من حيث أتيت، فعملت بنصيحة نرد وصرت أسمعها مما أحفظ من شعر المجنون، وهي كل يوم تزداد بي تعلقا وهیاما، فخرجنا أنا وهي ذات عشية إلى حادقة القصر حيث توجد من الزهور والورود ما لا عن رأت ولا أذن سمعت، العصافير تشدوا من حولنا نغما وبركة القصر تزيد الجو لطافة، فأسندت رأسها الى صدري لترتوي من حناني الذي لم أعرفه يوما، ولكنني بارع في تقمص شخصية الحنون كذلك، كما فعلت مع سعاد في الميناء</p>
+
+                            <p>ولكن الأمور لم تبقى على حالها إذ رآنا أحد الحراس فأسرع إلى الملك فأخبره بأنني أقبل الأميرة عند الحديقة، فلما سمع الملك شاه هذا الخبر، وقف شعر راسه غضبا وأمر الجنود "اشخصوه إلي حالا" فلم أشعر بنفسي حتى وجدت الجنود يمسكون بي، جندي على اليمين وجندي على اليسار فساقوني إلى الملك، فما إن رآني حتى صاح في وجهي أهكذا يكون رد الجميل؟ خذوه... ضعوه في السجن وقيدوا أرجله، ولم يمنحني حق الدفاع عن نفسي حتى، فوضعوني في زنزانة مقيدا، ولبثت هناك ثلاثة أيام لا خبرا يأتي بموت يخلصني مما أنا فيه ولا زيارة من هند تشرح لي ما الذي يحدث</p>
+
+                            <p>وفي اليوم الرابع استطاعت الجارية نرد أن تحتال حيلة على الحارس بحلو كلامها، فأغشت تفكيره بابتسامة عريضة ففتح لها الباب، مخالفا بذلك أمر الملك مطيعا لرغبة نرد، فأخبرتني بأن الملك لا يزال غاضبا ولكن هندا استطاعت ان تطيب خاطره وما علي إلا الصبر قليلا... وعشية ذلك اليوم الرابع أطلق سراحي، وجاءت إلي هند بنفسها كي تخرجني، وطلبت مني أن أطلب يدها من أبيها، فطلبت منها أن تتريث قليلا حتى تعود الأمور إلى نصايها...</p>
+
+                            <p>وسرت في هذا الحال حتى أنني بدأت أنسى السعادة التي جئت أبحث عنها، قلبت نظري وقلبت رأيي، ماذا أفعل؟ أأتزوجها ؟ سأزوجها لأصبح صاحب الأمر والنهي، أو من أهل الحل والعقد، وفي أحدى ليالي فبراير المظلمة بالشتاء والبرق والرعد يدوي، كان الملك شاه جالسا مختليا بنفسه فجئت إليه وقلت له هل تسمح لي سيدي بأن أكلمك في أمر مهم ؟</p>
+
+                            <p>فرفع بصره إلي وقال: تفضل قل ما عندك</p>
+
+                            <p>- إنني أريد الزواج من ابنتك هند، قلتها هكذا بكل طلاقة ودون مقدمات أو تمهيدات للموضوع ..</p>
+
+                            <p>فما كدت أن أتمم كلامي حتى صاح بي غاضبا تتطاير من فمه شرارات الغضب، ومن أنت حتى تتزوج ابنتي، أنسيت بأنك عامل من عمالي، كيف سولت لك نفسك أن تتجرأ على مثل هذا الكلام، أغرب عن وجهي لا أراك ثانية والا نكلت بك وأطحت برأسك وصاح إلى الحراس وأمرهم بإخراجي من القصر... جراني الحارسان كأنني شاة تجر إلى السوق...</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Updated default content for other chapters
+            return `
+                <div class="chapter-image-container">
+                    <img src="book/between%20the%20realms.jpg" alt="Between the Realms - Chapter ${chapterNum}">
+                </div>
+                <h2>Chapter ${chapterNum}</h2>
+                <div class="chapter-content">
+                    <p>We are coming soon</p>
+                </div>
+            `;
+        }
+
+        // Create chapters and add toggle functionality
+        for (let i = 1; i <= chapterCount; i++) {
+            // Add navigation item
+            const navItem = document.createElement('li');
+            navItem.className = 'nav-item';
+            navItem.innerHTML = `
+                <a href="#chapter${i}" class="nav-link">Chapter ${i}</a>
+            `;
+            navList.appendChild(navItem);
+
+            // Add chapter section
+            const section = document.createElement('section');
+            section.id = `chapter${i}`;
+            section.className = 'section';
+            section.style.display = 'none'; // Hide initially
+            section.innerHTML = generateChapterContent(i);
+            mainContent.appendChild(section);
+        }
+
+        // Add click event listeners to nav links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                
+                // Hide all sections
+                document.querySelectorAll('.section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Show clicked section
+                document.getElementById(targetId).style.display = 'block';
+                
+                // Close mobile menu if open
+                if (window.innerWidth <= 1024) {
+                    closeMenu();
+                }
+                
+                // Smooth scroll to section
+                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Show first chapter by default
+        document.querySelector('.section').style.display = 'block';
+
+        // Menu toggle functions
+        function closeMenu() {
+            sideNav.classList.remove('open');
+            overlay.classList.remove('active');
+            burgerMenu.classList.remove('open');
+        }
+
+        burgerMenu.addEventListener('click', () => {
+            sideNav.classList.add('open');
+            overlay.classList.add('active');
+            burgerMenu.classList.add('open');
+        });
+
+        closeNav.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
+
+        // Add this with your other event listeners
+        document.querySelector('.back-home').addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html> 
